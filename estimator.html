@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Cost Estimator | WeCanBuildThat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0b111e",
+                        accent: "#d4af37",
+                        "accent-dark": "#b49028",
+                        "slate-stone": "#565f6f",
+                        "obsidian-dark": "#060911",
+                        background: "#0b111e",
+                        surface: "#111827",
+                        "surface-light": "#1f2937",
+                        "text-light": "#f3f4f6",
+                        "text-muted": "#9ca3af"
+                    },
+                    fontFamily: {
+                        serif: ["Newsreader", "serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0b111e;
+            -webkit-font-smoothing: antialiased;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .form-focus:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans text-text-light antialiased">
+
+<!-- Floating Luxury Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-surface-light/40 shadow-xl">
+    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
+            <div class="flex flex-col">
+                <span class="text-xl font-bold tracking-wider font-serif text-white">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.25em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="index.html" id="nav-home">Home</a>
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="portfolio.html" id="nav-portfolio">Portfolio</a>
+            <a class="nav-link text-accent text-sm font-semibold tracking-wider uppercase" href="estimator.html" id="nav-estimator">Estimator</a>
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="contact.html" id="nav-contact">Consultation</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="estimator.html" class="bg-accent text-primary px-6 py-2.5 rounded font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10 inline-block">Get Estimate</a>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-32 pb-24">
+    <!-- Header -->
+    <section class="max-w-[1280px] mx-auto px-8 mb-12">
+        <div class="max-w-3xl">
+            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">INVESTMENT GUIDE</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Build Cost Estimator</h1>
+            <p class="text-text-muted text-base md:text-lg leading-relaxed">
+                Estimate the custom build valuation of your luxury residential or commercial development project instantly with our interactive calculator tool.
+            </p>
+        </div>
+    </section>
+
+    <!-- Estimator Grid -->
+    <section class="max-w-[1280px] mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <!-- Left Side: Controls -->
+            <div class="lg:col-span-7 bg-surface p-8 rounded-2xl border border-surface-light shadow-xl space-y-8">
+                <h2 class="font-serif text-2xl text-white pb-4 border-b border-surface-light/40">Project Customizations</h2>
+                
+                <!-- Project Type -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Build Specifications</label>
+                    <select class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light font-medium focus:ring-accent focus:border-accent form-focus" id="build-type" onchange="calculateEstimate()">
+                        <option value="residential-custom">Luxury Custom Residence ($350 / sq ft)</option>
+                        <option value="residential-premium">Premium Signature Estate ($500 / sq ft)</option>
+                        <option value="commercial-office">High-End Corporate Workspace ($400 / sq ft)</option>
+                    </select>
+                </div>
+
+                <!-- Range Slider: Sq Ft -->
+                <div>
+                    <div class="flex justify-between items-center mb-3">
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold">Total Area (Square Feet)</label>
+                        <span class="text-accent font-bold font-serif text-lg" id="sqft-val">3,500 sq ft</span>
+                    </div>
+                    <input class="w-full accent-accent bg-surface-light rounded-lg h-2" id="sqft-slider" max="10000" min="1000" oninput="calculateEstimate()" step="250" type="range" value="3500"/>
+                    <div class="flex justify-between text-xs text-text-muted mt-2">
+                        <span>1,000 sq ft</span>
+                        <span>10,000 sq ft</span>
+                    </div>
+                </div>
+
+                <!-- Finishes Selection -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Material Grade &amp; Finishes</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                            <input checked class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="standard"/>
+                            <span class="material-symbols-outlined text-accent text-3xl mb-2">construction</span>
+                            <span class="text-sm font-semibold text-white">Classic Elegance</span>
+                            <span class="text-xs text-text-muted mt-1">Included</span>
+                        </label>
+                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                            <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="premium"/>
+                            <span class="material-symbols-outlined text-accent text-3xl mb-2">hotel_class</span>
+                            <span class="text-sm font-semibold text-white">Signature Luxury</span>
+                            <span class="text-xs text-text-muted mt-1">+15% cost</span>
+                        </label>
+                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                            <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="bespoke"/>
+                            <span class="material-symbols-outlined text-accent text-3xl mb-2">diamond</span>
+                            <span class="text-sm font-semibold text-white">Bespoke Masterpiece</span>
+                            <span class="text-xs text-text-muted mt-1">+30% cost</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Display -->
+            <div class="lg:col-span-5 sticky top-28">
+                <div class="bg-gradient-to-br from-surface to-primary p-8 rounded-2xl border border-surface-light shadow-2xl relative overflow-hidden group">
+                    <div class="absolute -right-16 -top-16 w-36 h-36 bg-accent/5 rounded-full blur-2xl"></div>
+                    
+                    <h3 class="font-serif text-2xl text-white mb-6">Estimated Valuation</h3>
+                    
+                    <div class="space-y-6 pb-6 border-b border-surface-light/40">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-muted">Base Construction Cost:</span>
+                            <span class="text-white font-medium" id="base-cost">$1,225,000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-muted">Material Upgrades:</span>
+                            <span class="text-white font-medium" id="upgrade-cost">$0</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-text-muted">Architectural Engineering:</span>
+                            <span class="text-white font-medium" id="eng-cost">$98,000</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 pb-8">
+                        <span class="text-xs uppercase tracking-wider text-text-muted font-bold block mb-1">TOTAL ESTIMATED BUDGET</span>
+                        <span class="text-4xl md:text-5xl font-serif text-accent font-bold tracking-tight" id="total-val">$1,323,000</span>
+                        <p class="text-xs text-text-muted mt-3 leading-relaxed">
+                            *This serves as a high-fidelity ballpark estimation. Soil surveys, permit parameters, and custom blueprints will refine final pricing.
+                        </p>
+                    </div>
+
+                    <a href="contact.html" class="w-full bg-accent text-primary text-center py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 block">
+                        Proceed with Design Review
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-obsidian-dark border-t border-surface-light/30">
+    <div class="max-w-[1280px] mx-auto py-16 px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+        <div class="max-w-sm">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
+                <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
+            </div>
+            <p class="text-text-muted text-sm leading-relaxed mb-6">
+                Premium custom residential, general contracting, and commercial architectural execution. A proud member of the BlackMountain Development Company group.
+            </p>
+            <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
+                <ul class="space-y-2.5 text-sm text-text-muted">
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=residential">Custom Residential</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=commercial">Corporate Workspaces</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="contact.html">Planning &amp; Blueprints</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
+                <ul class="space-y-2.5 text-sm text-text-muted">
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html">Our Work</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="contact.html">Contact Us</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="estimator.html">Cost Estimator</a></li>
+                </ul>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">HQ Address</h4>
+                <p class="text-sm text-text-muted leading-relaxed">
+                    100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function calculateEstimate() {
+        // Read values
+        const buildType = document.getElementById('build-type').value;
+        const sqft = parseInt(document.getElementById('sqft-slider').value);
+        
+        // Update slider UI value
+        document.getElementById('sqft-val').innerText = sqft.toLocaleString() + ' sq ft';
+
+        // Base rate mapping
+        let baseRate = 350;
+        if (buildType === 'residential-premium') baseRate = 500;
+        if (buildType === 'commercial-office') baseRate = 400;
+
+        // Finish modifier
+        const finishOption = document.querySelector('input[name="finishes"]:checked').value;
+        let finishModifier = 0.0;
+        if (finishOption === 'premium') finishModifier = 0.15;
+        if (finishOption === 'bespoke') finishModifier = 0.30;
+
+        // Calculations
+        const baseCost = sqft * baseRate;
+        const upgradeCost = baseCost * finishModifier;
+        const engineeringCost = (baseCost + upgradeCost) * 0.08;
+        const totalCost = baseCost + upgradeCost + engineeringCost;
+
+        // Update UI
+        document.getElementById('base-cost').innerText = '$' + Math.round(baseCost).toLocaleString();
+        document.getElementById('upgrade-cost').innerText = '$' + Math.round(upgradeCost).toLocaleString();
+        document.getElementById('eng-cost').innerText = '$' + Math.round(engineeringCost).toLocaleString();
+        document.getElementById('total-val').innerText = '$' + Math.round(totalCost).toLocaleString();
+    }
+
+    // Initialize values on load
+    window.addEventListener('DOMContentLoaded', () => {
+        calculateEstimate();
+    });
+</script>
+
+</body>
+</html>

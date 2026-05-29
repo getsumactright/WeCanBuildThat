@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Consultation | WeCanBuildThat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#0b111e",
+                        accent: "#d4af37",
+                        "accent-dark": "#b49028",
+                        "slate-stone": "#565f6f",
+                        "obsidian-dark": "#060911",
+                        background: "#0b111e",
+                        surface: "#111827",
+                        "surface-light": "#1f2937",
+                        "text-light": "#f3f4f6",
+                        "text-muted": "#9ca3af"
+                    },
+                    fontFamily: {
+                        serif: ["Newsreader", "serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #0b111e;
+            -webkit-font-smoothing: antialiased;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .gold-focus:focus {
+            border-color: #d4af37 !important;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15) !important;
+        }
+    </style>
+</head>
+<body class="font-sans text-text-light antialiased">
+
+<!-- Floating Luxury Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-surface-light/40 shadow-xl">
+    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
+            <div class="flex flex-col">
+                <span class="text-xl font-bold tracking-wider font-serif text-white">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.25em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+            </div>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="index.html" id="nav-home">Home</a>
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="portfolio.html" id="nav-portfolio">Portfolio</a>
+            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="estimator.html" id="nav-estimator">Estimator</a>
+            <a class="nav-link text-accent text-sm font-semibold tracking-wider uppercase" href="contact.html" id="nav-contact">Consultation</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="estimator.html" class="bg-accent text-primary px-6 py-2.5 rounded font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10 inline-block">Get Estimate</a>
+        </div>
+    </div>
+</nav>
+
+<main class="pt-32 pb-24">
+    <!-- Header -->
+    <section class="max-w-[1280px] mx-auto px-8 mb-12 text-center">
+        <div class="max-w-2xl mx-auto">
+            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">DESIGN REVIEW</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Book Consultation</h1>
+            <p class="text-text-muted text-base md:text-lg leading-relaxed">
+                Connect with our senior architectural builders and engineering experts to review your plans and discuss custom development possibilities.
+            </p>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="max-w-[720px] mx-auto px-8">
+        <div class="bg-surface p-8 sm:p-12 rounded-2xl border border-surface-light shadow-2xl">
+            <form class="space-y-6" id="consultation-form">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="first-name">First Name</label>
+                        <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="first-name" placeholder="John" required type="text"/>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="last-name">Last Name</label>
+                        <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="last-name" placeholder="Doe" required type="text"/>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="email">Email Address</label>
+                    <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="email" placeholder="john@example.com" required type="email"/>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="project-type">Project Focus</label>
+                    <select class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="project-type">
+                        <option value="residential">Custom Residential Build</option>
+                        <option value="commercial">Commercial/Corporate Space</option>
+                        <option value="renovation">Comprehensive Architectural Renovation</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="message">Project Vision Details</label>
+                    <textarea class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light h-36 focus:ring-accent focus:border-accent gold-focus" id="message" placeholder="Describe your architectural blueprints, location, custom preferences..." required></textarea>
+                </div>
+
+                <div class="pt-4">
+                    <button class="w-full bg-accent text-primary py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10" type="submit">
+                        Submit Consultation Request
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-obsidian-dark border-t border-surface-light/30">
+    <div class="max-w-[1280px] mx-auto py-16 px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+        <div class="max-w-sm">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
+                <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
+            </div>
+            <p class="text-text-muted text-sm leading-relaxed mb-6">
+                Premium custom residential, general contracting, and commercial architectural execution. A proud member of the BlackMountain Development Company group.
+            </p>
+            <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
+                <ul class="space-y-2.5 text-sm text-text-muted">
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=residential">Custom Residential</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=commercial">Corporate Workspaces</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="contact.html">Planning &amp; Blueprints</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
+                <ul class="space-y-2.5 text-sm text-text-muted">
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html">Our Work</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="contact.html">Contact Us</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="estimator.html">Cost Estimator</a></li>
+                </ul>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">HQ Address</h4>
+                <p class="text-sm text-text-muted leading-relaxed">
+                    100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('consultation-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Thank you! Your custom project design review request has been sent. A BlackMountain Master-Builder will contact you within 24 hours.');
+        e.target.reset();
+    });
+</script>
+
+</body>
+</html>
