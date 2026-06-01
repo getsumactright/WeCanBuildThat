@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Cost Estimator | WeCanBuildThat</title>
+    <title>Project Estimator | WeCanBuildThat — Web Dev, Design & Network Infrastructure</title>
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -91,10 +91,10 @@
     <!-- Header -->
     <section class="max-w-[1280px] mx-auto px-8 mb-12">
         <div class="max-w-3xl">
-            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">INVESTMENT GUIDE</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Build Cost Estimator</h1>
+            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">PROJECT BUDGET GUIDE</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Project Cost Estimator</h1>
             <p class="text-text-muted text-base md:text-lg leading-relaxed">
-                Estimate the custom build valuation of your luxury residential or commercial development project instantly with our interactive calculator tool.
+                Get an instant ballpark for your web development, design, or network infrastructure project. Adjust the inputs to match your needs.
             </p>
         </div>
     </section>
@@ -108,48 +108,50 @@
                 
                 <!-- Project Type -->
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Build Specifications</label>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Project Type</label>
                     <select class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light font-medium focus:ring-accent focus:border-accent form-focus" id="build-type" onchange="calculateEstimate()">
-                        <option value="residential-custom">Luxury Custom Residence ($350 / sq ft)</option>
-                        <option value="residential-premium">Premium Signature Estate ($500 / sq ft)</option>
-                        <option value="commercial-office">High-End Corporate Workspace ($400 / sq ft)</option>
+                        <option value="website-standard">Business Website ($3,500 base)</option>
+                        <option value="website-custom">Custom Web Application ($8,000 base)</option>
+                        <option value="ecommerce">E-Commerce Platform ($6,000 base)</option>
+                        <option value="network-small">Network Install — Small Office ($2,500 base)</option>
+                        <option value="network-enterprise">Network Install — Enterprise ($7,500 base)</option>
                     </select>
                 </div>
 
                 <!-- Range Slider: Sq Ft -->
                 <div>
                     <div class="flex justify-between items-center mb-3">
-                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold">Total Area (Square Feet)</label>
-                        <span class="text-accent font-bold font-serif text-lg" id="sqft-val">3,500 sq ft</span>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold">Number of Pages / Network Drops</label>
+                        <span class="text-accent font-bold font-serif text-lg" id="sqft-val">10</span>
                     </div>
-                    <input class="w-full accent-accent bg-surface-light rounded-lg h-2" id="sqft-slider" max="10000" min="1000" oninput="calculateEstimate()" step="250" type="range" value="3500"/>
+                    <input class="w-full accent-accent bg-surface-light rounded-lg h-2" id="sqft-slider" max="50" min="1" oninput="calculateEstimate()" step="1" type="range" value="10"/>
                     <div class="flex justify-between text-xs text-text-muted mt-2">
-                        <span>1,000 sq ft</span>
-                        <span>10,000 sq ft</span>
+                        <span>1</span>
+                        <span>50</span>
                     </div>
                 </div>
 
                 <!-- Finishes Selection -->
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Material Grade &amp; Finishes</label>
+                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Service Tier</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
                             <input checked class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="standard"/>
-                            <span class="material-symbols-outlined text-accent text-3xl mb-2">construction</span>
-                            <span class="text-sm font-semibold text-white">Classic Elegance</span>
+                            <span class="material-symbols-outlined text-accent text-3xl mb-2">rocket_launch</span>
+                            <span class="text-sm font-semibold text-white">Starter</span>
                             <span class="text-xs text-text-muted mt-1">Included</span>
                         </label>
                         <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
                             <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="premium"/>
                             <span class="material-symbols-outlined text-accent text-3xl mb-2">hotel_class</span>
-                            <span class="text-sm font-semibold text-white">Signature Luxury</span>
-                            <span class="text-xs text-text-muted mt-1">+15% cost</span>
+                            <span class="text-sm font-semibold text-white">Professional</span>
+                            <span class="text-xs text-text-muted mt-1">+25% — Advanced features</span>
                         </label>
                         <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
                             <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="bespoke"/>
                             <span class="material-symbols-outlined text-accent text-3xl mb-2">diamond</span>
-                            <span class="text-sm font-semibold text-white">Bespoke Masterpiece</span>
-                            <span class="text-xs text-text-muted mt-1">+30% cost</span>
+                            <span class="text-sm font-semibold text-white">Enterprise</span>
+                            <span class="text-xs text-text-muted mt-1">+50% — Full custom build</span>
                         </label>
                     </div>
                 </div>
@@ -164,16 +166,16 @@
                     
                     <div class="space-y-6 pb-6 border-b border-surface-light/40">
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Base Construction Cost:</span>
-                            <span class="text-white font-medium" id="base-cost">$1,225,000</span>
+                            <span class="text-text-muted">Base Project Cost:</span>
+                            <span class="text-white font-medium" id="base-cost">$3,500</span>
                         </div>
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Material Upgrades:</span>
+                            <span class="text-text-muted">Tier Upgrade:</span>
                             <span class="text-white font-medium" id="upgrade-cost">$0</span>
                         </div>
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Architectural Engineering:</span>
-                            <span class="text-white font-medium" id="eng-cost">$98,000</span>
+                            <span class="text-text-muted">Discovery & Strategy:</span>
+                            <span class="text-white font-medium" id="eng-cost">$350</span>
                         </div>
                     </div>
 
@@ -181,12 +183,12 @@
                         <span class="text-xs uppercase tracking-wider text-text-muted font-bold block mb-1">TOTAL ESTIMATED BUDGET</span>
                         <span class="text-4xl md:text-5xl font-serif text-accent font-bold tracking-tight" id="total-val">$1,323,000</span>
                         <p class="text-xs text-text-muted mt-3 leading-relaxed">
-                            *This serves as a high-fidelity ballpark estimation. Soil surveys, permit parameters, and custom blueprints will refine final pricing.
+                            *This is a ballpark estimate. Final pricing is determined after a free discovery call and detailed scoping session.
                         </p>
                     </div>
 
                     <a href="contact.html" class="w-full bg-accent text-primary text-center py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 block">
-                        Proceed with Design Review
+                        Start Your Project
                     </a>
                 </div>
             </div>
@@ -236,34 +238,32 @@
 
 <script>
     function calculateEstimate() {
-        // Read values
         const buildType = document.getElementById('build-type').value;
-        const sqft = parseInt(document.getElementById('sqft-slider').value);
-        
-        // Update slider UI value
-        document.getElementById('sqft-val').innerText = sqft.toLocaleString() + ' sq ft';
+        const qty = parseInt(document.getElementById('sqft-slider').value);
+        document.getElementById('sqft-val').innerText = qty;
 
-        // Base rate mapping
-        let baseRate = 350;
-        if (buildType === 'residential-premium') baseRate = 500;
-        if (buildType === 'commercial-office') baseRate = 400;
+        // Base rates by project type
+        const baseRates = {
+            'website-standard': 3500,
+            'website-custom': 8000,
+            'ecommerce': 6000,
+            'network-small': 2500,
+            'network-enterprise': 7500
+        };
+        let baseCost = (baseRates[buildType] || 3500) + (qty - 1) * 200;
 
-        // Finish modifier
         const finishOption = document.querySelector('input[name="finishes"]:checked').value;
         let finishModifier = 0.0;
-        if (finishOption === 'premium') finishModifier = 0.15;
-        if (finishOption === 'bespoke') finishModifier = 0.30;
+        if (finishOption === 'premium') finishModifier = 0.25;
+        if (finishOption === 'bespoke') finishModifier = 0.50;
 
-        // Calculations
-        const baseCost = sqft * baseRate;
         const upgradeCost = baseCost * finishModifier;
-        const engineeringCost = (baseCost + upgradeCost) * 0.08;
-        const totalCost = baseCost + upgradeCost + engineeringCost;
+        const strategyCost = (baseCost + upgradeCost) * 0.10;
+        const totalCost = baseCost + upgradeCost + strategyCost;
 
-        // Update UI
         document.getElementById('base-cost').innerText = '$' + Math.round(baseCost).toLocaleString();
         document.getElementById('upgrade-cost').innerText = '$' + Math.round(upgradeCost).toLocaleString();
-        document.getElementById('eng-cost').innerText = '$' + Math.round(engineeringCost).toLocaleString();
+        document.getElementById('eng-cost').innerText = '$' + Math.round(strategyCost).toLocaleString();
         document.getElementById('total-val').innerText = '$' + Math.round(totalCost).toLocaleString();
     }
 
