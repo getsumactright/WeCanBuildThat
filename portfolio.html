@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -8,21 +8,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#0b111e",
-                        accent: "#d4af37",
-                        "accent-dark": "#b49028",
-                        "obsidian-dark": "#060911",
-                        background: "#0b111e",
-                        surface: "#111827",
-                        "surface-light": "#1f2937",
-                        "text-light": "#f3f4f6",
-                        "text-muted": "#9ca3af"
+                        midnight: "#111827",
+                        "midnight-deep": "#0f172a",
+                        offwhite: "#fafafa",
+                        apple: "#f5f5f7",
+                        accent: "#2563eb",
+                        "accent-dark": "#1d4ed8",
+                        "accent-light": "#eff6ff",
+                        "border-light": "#e5e7eb",
+                        "text-body": "#374151",
+                        "text-muted": "#6b7280",
                     },
                     fontFamily: {
                         serif: ["Newsreader", "serif"],
@@ -34,110 +34,95 @@
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-        body { background-color: #0b111e; -webkit-font-smoothing: antialiased; }
+        body { background-color: #fafafa; -webkit-font-smoothing: antialiased; }
         .nav-link { position: relative; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: #d4af37; transition: width 0.3s ease; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #2563eb; transition: width 0.3s ease; border-radius: 2px; }
         .nav-link:hover::after { width: 100%; }
-
-        /* Mobile menu */
         #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         #mobile-menu.open { transform: translateX(0); }
+        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
         body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
         body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
         body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
-        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-
-        .filter-btn.active { background-color: #d4af37; color: #0b111e; border-color: #d4af37; }
-
-        .project-card { transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; }
-        .project-card:hover { transform: translateY(-5px); border-color: rgba(212,175,55,0.45); box-shadow: 0 12px 40px rgba(212,175,55,0.08); }
-
-        /* Lightbox */
+        .filter-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; }
+        .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(37,99,235,0.1); }
         #lightbox { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-
-        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
         .delay-100 { transition-delay: 0.1s; }
         .delay-200 { transition-delay: 0.2s; }
         .delay-300 { transition-delay: 0.3s; }
         .delay-400 { transition-delay: 0.4s; }
-        .delay-500 { transition-delay: 0.5s; }
-        .delay-600 { transition-delay: 0.6s; }
-
-        .gold-text {
-            background: linear-gradient(135deg, #d4af37, #f2ca50, #b49028);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .section-tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
     </style>
 </head>
-<body class="font-sans text-text-light antialiased">
+<body class="font-sans text-midnight antialiased">
 
-<!-- ─── NAVIGATION ─── -->
-<nav class="fixed top-0 w-full z-50 bg-primary/85 backdrop-blur-md border-b border-surface-light/40 shadow-xl">
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
     <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
         <a href="index.html" class="flex items-center gap-3 select-none group">
-            <span class="material-symbols-outlined text-accent text-3xl group-hover:scale-110 transition-transform duration-300">terminal</span>
+            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
+                <span class="material-symbols-outlined text-white text-xl">terminal</span>
+            </div>
             <div class="flex flex-col">
-                <span class="text-xl font-bold tracking-wider font-serif text-white">WeCanBuildThat</span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
             </div>
         </a>
         <div class="hidden md:flex items-center gap-8">
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="index.html">Home</a>
-            <a class="nav-link text-accent text-sm font-semibold tracking-wider uppercase" href="portfolio.html">Portfolio</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="estimator.html">Estimator</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="contact.html">Consultation</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="index.html">Home</a>
+            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="portfolio.html">Portfolio</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="estimator.html">Estimator</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="contact.html">Consultation</a>
         </div>
         <div class="flex items-center gap-4">
-            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-primary px-6 py-2.5 rounded font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10">Get Estimate</a>
+            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 shadow-md shadow-accent/20">Get Estimate</a>
             <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
-                <span id="ham-top" class="block w-full h-[2px] bg-white rounded-full"></span>
-                <span id="ham-mid" class="block w-3/4 h-[2px] bg-white rounded-full"></span>
-                <span id="ham-bot" class="block w-full h-[2px] bg-white rounded-full"></span>
+                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
             </button>
         </div>
     </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-40 bg-obsidian-dark/98 backdrop-blur-2xl flex flex-col justify-center items-center gap-8">
-    <a class="font-serif text-4xl text-white hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
-    <a class="font-serif text-4xl text-white hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
-    <a class="font-serif text-4xl text-white hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
-    <a class="font-serif text-4xl text-white hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
-    <a class="mt-4 bg-accent text-primary font-bold text-sm uppercase tracking-wider px-12 py-5 rounded" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
+    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl shadow-lg" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
 </div>
 
 <!-- Lightbox -->
-<div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 items-center justify-center hidden" onclick="closeLightbox()">
+<div id="lightbox" class="fixed inset-0 z-[100] bg-midnight-deep/90 items-center justify-center hidden" onclick="closeLightbox()">
     <button class="absolute top-6 right-6 text-white/70 hover:text-white" onclick="closeLightbox()">
         <span class="material-symbols-outlined text-4xl">close</span>
     </button>
-    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl shadow-2xl"/>
-    <p id="lightbox-title" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white font-serif text-lg bg-primary/80 backdrop-blur-sm px-6 py-2 rounded-full"></p>
+    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[85vh] object-contain rounded-2xl shadow-2xl"/>
+    <p id="lightbox-title" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white font-serif text-lg bg-midnight/80 backdrop-blur-sm px-6 py-2 rounded-full whitespace-nowrap"></p>
 </div>
 
 <main class="pt-32 pb-24">
     <!-- Header -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-16">
+    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-14">
         <div class="max-w-3xl reveal">
-            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">OUR ARCHIVE</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Visual <span class="italic font-light gold-text">Portfolio</span></h1>
-            <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-2xl">
-                Explore our curated gallery of modern residential properties, corporate designs, and commercial layouts built under the BlackMountain legacy.
-            </p>
+            <span class="section-tag">Our Archive</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-midnight mb-5">Project <em class="italic font-light text-accent">Portfolio</em></h1>
+            <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-2xl">Explore our curated gallery of web development builds, UI/UX design work, and enterprise network infrastructure installations across Northern California.</p>
         </div>
     </section>
 
     <!-- Filters -->
     <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-12 reveal">
-        <div class="flex flex-wrap gap-3 border-b border-surface-light/40 pb-8">
-            <button class="filter-btn active px-6 py-2 rounded font-semibold text-sm border border-accent/20 hover:border-accent transition-all duration-300" onclick="filterProjects('all')" id="btn-filter-all">All Projects</button>
-            <button class="filter-btn px-6 py-2 rounded font-semibold text-sm border border-surface-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('web-dev')" id="btn-filter-web-dev">Web Development</button>
-            <button class="filter-btn px-6 py-2 rounded font-semibold text-sm border border-surface-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('design')" id="btn-filter-design">Web Design</button>
-            <button class="filter-btn px-6 py-2 rounded font-semibold text-sm border border-surface-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('network')" id="btn-filter-network">Network Infrastructure</button>
+        <div class="flex flex-wrap gap-3 border-b border-border-light pb-8">
+            <button class="filter-btn active px-5 py-2 rounded-lg font-semibold text-sm border border-accent/30 transition-all duration-300" onclick="filterProjects('all')" id="btn-filter-all">All Projects</button>
+            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('web-dev')" id="btn-filter-web-dev">Web Development</button>
+            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('design')" id="btn-filter-design">Web Design</button>
+            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('network')" id="btn-filter-network">Network Infrastructure</button>
         </div>
     </section>
 
@@ -145,241 +130,195 @@
     <section class="max-w-[1280px] mx-auto px-6 md:px-8">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
 
-            <!-- Project 1: Web Dev -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-100" data-category="web-dev">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_dev.png', 'FinTech Client Portal — Sacramento, CA')">
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-100" data-category="web-dev">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_dev.png','FinTech Client Portal — Sacramento, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_dev.png" alt="FinTech Client Portal"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Web Development</span>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Web Dev</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">FinTech Client Portal</h3>
+                    <h3 class="font-serif text-xl text-midnight mb-2">FinTech Client Portal</h3>
                     <p class="text-text-muted text-sm leading-relaxed mb-4">Full-stack React + Node.js web application for a regional financial services firm — featuring real-time dashboards, secure auth, and document management.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Sacramento, CA</span>
-                        <span class="text-xs text-text-muted">React · Node.js · PostgreSQL</span>
+                        <span class="text-xs font-bold text-accent">Sacramento, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">React · Node.js</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 2: Web Design -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-200" data-category="design">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png', 'Luxury Brand Redesign — Elk Grove, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="Luxury Brand Website Redesign"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Web Design</span>
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="design">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png','Luxury Brand Redesign — Elk Grove, CA')">
+                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="Luxury Brand Redesign"/>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">Luxury Brand Redesign</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Complete brand identity refresh and website redesign for a NorCal luxury goods company — resulting in a 40% increase in qualified leads within 60 days of launch.</p>
+                    <h3 class="font-serif text-xl text-midnight mb-2">Luxury Brand Redesign</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-4">Complete brand identity refresh and website redesign — resulting in a 40% increase in qualified leads within 60 days of launch.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Elk Grove, CA</span>
-                        <span class="text-xs text-text-muted">Figma · HTML/CSS · Brand System</span>
+                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Figma · Brand</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 3: Network -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-300" data-category="network">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png', 'Corporate Campus Network — Folsom, CA')">
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-300" data-category="network">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png','Corporate Campus Network — Folsom, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/network_infra.png" alt="Corporate Campus Network"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Network Infrastructure</span>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Network</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">Corporate Campus Network</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Full structured cabling installation for a 12,000 sq ft corporate campus — Cat6A, fiber backbone, 28 Wi-Fi 6E access points, and a managed rack build-out.</p>
+                    <h3 class="font-serif text-xl text-midnight mb-2">Corporate Campus Network</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-4">Full structured cabling for a 12,000 sq ft corporate campus — Cat6A, fiber backbone, 28 Wi-Fi 6E access points, and a managed rack build-out.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Folsom, CA</span>
-                        <span class="text-xs text-text-muted">Cat6A · Fiber · Wi-Fi 6E</span>
+                        <span class="text-xs font-bold text-accent">Folsom, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Cat6A · Wi-Fi 6E</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 4: Web Dev -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-200" data-category="web-dev">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/hero.png', 'Data Center Management Platform — Elk Grove, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/hero.png" alt="Data Center Management Platform"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Web Development</span>
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="web-dev">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/hero_tech.png','Data Center Dashboard — Elk Grove, CA')">
+                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/hero_tech.png" alt="Data Center Dashboard"/>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Web Dev</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">Data Center Dashboard</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Real-time infrastructure monitoring dashboard with custom alert logic, rack visualization, and automated reporting built for a regional data center operator.</p>
+                    <h3 class="font-serif text-xl text-midnight mb-2">Data Center Dashboard</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-4">Real-time infrastructure monitoring dashboard with custom alert logic, rack visualization, and automated reporting for a regional data center operator.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Elk Grove, CA</span>
-                        <span class="text-xs text-text-muted">Next.js · WebSockets · Chart.js</span>
+                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Next.js · Chart.js</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 5: Network -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-300" data-category="network">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png', 'Medical Office Network — Roseville, CA')">
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-300" data-category="network">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png','Medical Office Network — Roseville, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/network_infra.png" alt="Medical Office Network"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Network Infrastructure</span>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Network</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">Medical Office Network</h3>
+                    <h3 class="font-serif text-xl text-midnight mb-2">Medical Office Network</h3>
                     <p class="text-text-muted text-sm leading-relaxed mb-4">HIPAA-compliant network segmentation, VoIP phone system, and secure wireless rollout for a multi-suite medical practice across two floors.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Roseville, CA</span>
-                        <span class="text-xs text-text-muted">HIPAA · VoIP · VLAN Segmentation</span>
+                        <span class="text-xs font-bold text-accent">Roseville, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">HIPAA · VoIP</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 6: Web Design -->
-            <div class="project-card bg-surface rounded-xl border border-surface-light/50 overflow-hidden shadow-lg reveal delay-400" data-category="design">
-                <div class="h-64 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png', 'E-Commerce Platform Design — Sacramento, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="E-Commerce Platform Design"/>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-                    </div>
-                    <span class="absolute top-4 left-4 bg-primary/80 backdrop-blur-sm text-accent text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded">Web Design</span>
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-400" data-category="design">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png','E-Commerce Platform Design — Sacramento, CA')">
+                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="E-Commerce Platform"/>
+                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-white mb-2">E-Commerce Platform</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">End-to-end UX/UI design for a premium e-commerce platform — user journey mapping, high-fidelity Figma prototypes, and a full design system handoff.</p>
+                    <h3 class="font-serif text-xl text-midnight mb-2">E-Commerce Platform</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-4">End-to-end UX/UI design — user journey mapping, high-fidelity Figma prototypes, and a full design system handoff for a premium e-commerce brand.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-semibold text-accent uppercase tracking-wider">Sacramento, CA</span>
-                        <span class="text-xs text-text-muted">Figma · UX Research · Design System</span>
+                        <span class="text-xs font-bold text-accent">Sacramento, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Figma · UX</span>
                     </div>
                 </div>
             </div>
 
         </div>
-
-        <!-- No Results Message -->
-        <div class="hidden text-center py-20 text-text-muted" id="no-results">
-            <span class="material-symbols-outlined text-5xl text-surface-light mb-4 block">search_off</span>
-            <p class="text-lg font-serif text-white">No projects found in this category.</p>
+        <div class="hidden text-center py-20" id="no-results">
+            <span class="material-symbols-outlined text-5xl text-border-light mb-4 block">search_off</span>
+            <p class="text-lg font-serif text-midnight">No projects in this category yet.</p>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="max-w-[1280px] mx-auto px-6 md:px-8 mt-20">
-        <div class="bg-surface border border-surface-light/50 rounded-2xl p-10 md:p-14 text-center relative overflow-hidden reveal">
-            <div class="absolute inset-0 bg-gradient-to-br from-accent/3 to-transparent pointer-events-none"></div>
-            <h2 class="font-serif text-2xl md:text-3xl text-white mb-4 relative">Ready to start your <span class="italic gold-text font-light">build journey?</span></h2>
-            <p class="text-text-muted text-sm md:text-base mb-8 max-w-lg mx-auto relative">Use our interactive cost estimator to get an instant ballpark, or book a free consultation with our team.</p>
+        <div class="bg-midnight-deep rounded-2xl p-10 md:p-14 text-center relative overflow-hidden reveal">
+            <div class="absolute inset-0 opacity-10" style="background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:60px 60px;"></div>
+            <h2 class="font-serif text-2xl md:text-3xl text-white mb-4 relative">Ready to start your <em class="italic font-light text-blue-400">next project?</em></h2>
+            <p class="text-gray-400 text-sm md:text-base mb-8 max-w-lg mx-auto relative">Use our interactive cost estimator for an instant ballpark, or book a free consultation with our team.</p>
             <div class="flex flex-wrap justify-center gap-4 relative">
-                <a href="estimator.html" class="bg-accent text-primary font-semibold px-8 py-4 rounded hover:bg-accent-dark transition-all duration-300 shadow-lg shadow-accent/10">Run Cost Estimator</a>
-                <a href="contact.html" class="border border-surface-light text-text-muted hover:border-accent hover:text-accent font-semibold px-8 py-4 rounded transition-all duration-300">Book Consultation</a>
+                <a href="estimator.html" class="bg-accent text-white font-semibold px-8 py-4 rounded-xl hover:bg-accent-dark transition-all duration-300 shadow-lg shadow-accent/25">Run Cost Estimator</a>
+                <a href="contact.html" class="border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-300">Book Consultation</a>
             </div>
         </div>
     </section>
 </main>
 
 <!-- Footer -->
-<footer class="bg-obsidian-dark border-t border-surface-light/30 mt-16">
+<footer class="bg-midnight border-t border-white/10 mt-16">
     <div class="max-w-[1280px] mx-auto py-16 px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
         <div class="max-w-sm">
             <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-accent text-3xl">terminal</span>
-                <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
+                <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl">terminal</span></div>
+                <span class="text-lg font-bold font-serif text-white tracking-tight">WeCanBuildThat</span>
             </div>
-            <p class="text-text-muted text-sm leading-relaxed mb-4">Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
             <div class="flex flex-col gap-2 mb-4">
-                <a href="tel:+19165550100" class="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors">
-                    <span class="material-symbols-outlined text-accent text-base">call</span>(916) 555-0100
-                </a>
-                <a href="mailto:info@wecanbuildthat.com" class="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors">
-                    <span class="material-symbols-outlined text-accent text-base">mail</span>info@wecanbuildthat.com
-                </a>
+                <a href="tel:+19165550100" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">call</span>(916) 555-0100</a>
+                <a href="mailto:info@wecanbuildthat.com" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">mail</span>info@wecanbuildthat.com</a>
             </div>
-            <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
+            <p class="text-xs text-gray-500">© 2026 WeCanBuildThat. All Rights Reserved.</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=web-dev">Web Development</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=design">Web Design</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Development</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=design">Web Design</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html">Our Work</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="estimator.html">Cost Estimator</a></li>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html">Our Work</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="contact.html">Contact Us</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="estimator.html">Estimator</a></li>
                 </ul>
             </div>
-            <div class="col-span-2 sm:col-span-1">
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">HQ Address</h4>
-                <p class="text-sm text-text-muted leading-relaxed">100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624</p>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Address</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624</p>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-    // Mobile Menu
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
-    hamburgerBtn.addEventListener('click', () => {
-        const isOpen = mobileMenu.classList.contains('open');
-        isOpen ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open'));
-    });
+    hamburgerBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open')); });
 
-    // Scroll Reveal
     const revealEls = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => obs.observe(el));
 
-    // Filter
     function filterProjects(category) {
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('active');
-            btn.classList.add('text-text-muted');
-        });
-        // Map old URL params to new category names
-        if (category === 'residential' || category === 'commercial') category = 'all';
+        document.querySelectorAll('.filter-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.add('text-text-muted'); });
         const activeBtn = document.getElementById('btn-filter-' + category);
         if (activeBtn) { activeBtn.classList.add('active'); activeBtn.classList.remove('text-text-muted'); }
-
         const cards = document.querySelectorAll('.project-card');
         let visible = 0;
-        cards.forEach(card => {
-            const show = category === 'all' || card.getAttribute('data-category') === category;
-            card.style.display = show ? 'block' : 'none';
-            if (show) visible++;
-        });
+        cards.forEach(card => { const show = category === 'all' || card.getAttribute('data-category') === category; card.style.display = show ? 'block' : 'none'; if (show) visible++; });
         document.getElementById('no-results').classList.toggle('hidden', visible > 0);
     }
 
-    // Lightbox
     function openLightbox(src, title) {
         const lb = document.getElementById('lightbox');
         document.getElementById('lightbox-img').src = src;
         document.getElementById('lightbox-title').textContent = title;
-        lb.classList.remove('hidden');
-        lb.classList.add('flex');
-        document.body.style.overflow = 'hidden';
+        lb.classList.remove('hidden'); lb.classList.add('flex'); document.body.style.overflow = 'hidden';
     }
     function closeLightbox() {
         const lb = document.getElementById('lightbox');
-        lb.classList.add('hidden');
-        lb.classList.remove('flex');
-        document.body.style.overflow = '';
+        lb.classList.add('hidden'); lb.classList.remove('flex'); document.body.style.overflow = '';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-    // URL filter param
     window.addEventListener('DOMContentLoaded', () => {
         const filter = new URLSearchParams(window.location.search).get('filter') || 'all';
         filterProjects(filter);

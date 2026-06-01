@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Consultation | WeCanBuildThat — Web Dev, Design & Network Infrastructure</title>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <meta name="description" content="Book a free consultation with WeCanBuildThat. We specialize in web development, web design, and enterprise network infrastructure in Northern California."/>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#0b111e",
-                        accent: "#d4af37",
-                        "accent-dark": "#b49028",
-                        "slate-stone": "#565f6f",
-                        "obsidian-dark": "#060911",
-                        background: "#0b111e",
-                        surface: "#111827",
-                        "surface-light": "#1f2937",
-                        "text-light": "#f3f4f6",
-                        "text-muted": "#9ca3af"
+                        midnight: "#111827",
+                        "midnight-deep": "#0f172a",
+                        offwhite: "#fafafa",
+                        apple: "#f5f5f7",
+                        accent: "#2563eb",
+                        "accent-dark": "#1d4ed8",
+                        "accent-light": "#eff6ff",
+                        "border-light": "#e5e7eb",
+                        "text-body": "#374151",
+                        "text-muted": "#6b7280",
                     },
                     fontFamily: {
                         serif: ["Newsreader", "serif"],
@@ -33,165 +33,213 @@
         }
     </script>
     <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        body {
-            background-color: #0b111e;
-            -webkit-font-smoothing: antialiased;
-        }
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -4px;
-            left: 0;
-            background-color: #d4af37;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .gold-focus:focus {
-            border-color: #d4af37 !important;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15) !important;
-        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        body { background-color: #fafafa; -webkit-font-smoothing: antialiased; }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #2563eb; transition: width 0.3s ease; border-radius: 2px; }
+        .nav-link:hover::after { width: 100%; }
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        #mobile-menu.open { transform: translateX(0); }
+        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+        body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
+        body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
+        body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .section-tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+        .gold-focus:focus { outline: none; ring: 2px; --tw-ring-color: #2563eb; border-color: #2563eb; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+        .info-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .info-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(37,99,235,0.08); }
     </style>
 </head>
-<body class="font-sans text-text-light antialiased">
+<body class="font-sans text-midnight antialiased">
 
-<!-- Floating Luxury Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-surface-light/40 shadow-xl">
-    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-accent text-3xl">terminal</span>
-            <div class="flex flex-col">
-                <span class="text-xl font-bold tracking-wider font-serif text-white">WeCanBuildThat</span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
+    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
+        <a href="index.html" class="flex items-center gap-3 select-none group">
+            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
+                <span class="material-symbols-outlined text-white text-xl">terminal</span>
             </div>
-        </div>
+            <div class="flex flex-col">
+                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+            </div>
+        </a>
         <div class="hidden md:flex items-center gap-8">
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="index.html" id="nav-home">Home</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="portfolio.html" id="nav-portfolio">Portfolio</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="estimator.html" id="nav-estimator">Estimator</a>
-            <a class="nav-link text-accent text-sm font-semibold tracking-wider uppercase" href="contact.html" id="nav-contact">Consultation</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="index.html">Home</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="portfolio.html">Portfolio</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="estimator.html">Estimator</a>
+            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="contact.html">Consultation</a>
         </div>
         <div class="flex items-center gap-4">
-            <a href="estimator.html" class="bg-accent text-primary px-6 py-2.5 rounded font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10 inline-block">Get Estimate</a>
+            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 shadow-md shadow-accent/20">Get Estimate</a>
+            <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
+                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+            </button>
         </div>
     </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
+    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
+</div>
+
 <main class="pt-32 pb-24">
     <!-- Header -->
-    <section class="max-w-[1280px] mx-auto px-8 mb-12 text-center">
-        <div class="max-w-2xl mx-auto">
-            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">START A PROJECT</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Book a Consultation</h1>
-            <p class="text-text-muted text-base md:text-lg leading-relaxed">
-                Connect with our team to discuss your web development, design, or network infrastructure project. We'll map the right solution and get you a clear plan.
-            </p>
+    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-14 text-center">
+        <div class="max-w-2xl mx-auto reveal">
+            <span class="section-tag">Start a Project</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-midnight mb-5">Book a <em class="italic font-light text-accent">Consultation</em></h1>
+            <p class="text-text-muted text-base md:text-lg leading-relaxed">Connect with our team to discuss your web development, design, or network infrastructure project. We'll map the right solution and get you a clear plan.</p>
         </div>
     </section>
 
-    <!-- Form Section -->
-    <section class="max-w-[720px] mx-auto px-8">
-        <div class="bg-surface p-8 sm:p-12 rounded-2xl border border-surface-light shadow-2xl">
-            <form class="space-y-6" id="consultation-form">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="first-name">First Name</label>
-                        <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="first-name" placeholder="John" required type="text"/>
+    <!-- Contact Grid -->
+    <section class="max-w-[1280px] mx-auto px-6 md:px-8">
+        <div class="grid lg:grid-cols-5 gap-12 items-start">
+
+            <!-- Form -->
+            <div class="lg:col-span-3 bg-white rounded-2xl border border-border-light shadow-sm p-8 md:p-10 reveal">
+                <h2 class="font-serif text-2xl text-midnight mb-8">Tell Us About Your Project</h2>
+                <form id="consultation-form" class="space-y-6">
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="first-name">First Name</label>
+                            <input class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight placeholder-text-muted focus:bg-white transition-colors" id="first-name" placeholder="Jane" required type="text"/>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="last-name">Last Name</label>
+                            <input class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight placeholder-text-muted focus:bg-white transition-colors" id="last-name" placeholder="Smith" required type="text"/>
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="last-name">Last Name</label>
-                        <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="last-name" placeholder="Doe" required type="text"/>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="email">Email Address</label>
+                        <input class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight placeholder-text-muted focus:bg-white transition-colors" id="email" placeholder="jane@company.com" required type="email"/>
                     </div>
-                </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="phone">Phone (Optional)</label>
+                        <input class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight placeholder-text-muted focus:bg-white transition-colors" id="phone" placeholder="(916) 000-0000" type="tel"/>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="project-type">Service Needed</label>
+                        <select class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight focus:bg-white transition-colors" id="project-type">
+                            <option value="web-dev">Web Development (Custom Site / Web App)</option>
+                            <option value="design">Web Design (UI/UX, Brand, Redesign)</option>
+                            <option value="network">Network Infrastructure Installation</option>
+                            <option value="full-stack">Full Stack (Web + Network)</option>
+                            <option value="maintenance">Ongoing Support & Maintenance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-bold mb-2" for="message">Project Details</label>
+                        <textarea class="w-full bg-offwhite border border-border-light rounded-xl px-4 py-3 text-midnight h-36 placeholder-text-muted focus:bg-white transition-colors" id="message" placeholder="Tell us about your project — goals, timeline, tech preferences, budget range..." required></textarea>
+                    </div>
+                    <button class="w-full bg-accent text-white py-4 rounded-xl font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-md shadow-accent/20" type="submit">
+                        Send Project Request
+                    </button>
+                </form>
+            </div>
 
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="email">Email Address</label>
-                    <input class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="email" placeholder="john@example.com" required type="email"/>
+            <!-- Contact Info -->
+            <div class="lg:col-span-2 space-y-5 reveal">
+                <div class="info-card bg-white rounded-2xl border border-border-light p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-accent text-2xl">call</span>
+                    </div>
+                    <h3 class="font-semibold text-midnight text-sm mb-1">Phone</h3>
+                    <a href="tel:+19165550100" class="text-accent font-semibold hover:text-accent-dark transition-colors">(916) 555-0100</a>
+                    <p class="text-text-muted text-xs mt-1">Mon–Fri, 8am–6pm PST</p>
                 </div>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="project-type">Service Needed</label>
-                    <select class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light focus:ring-accent focus:border-accent gold-focus" id="project-type">
-                        <option value="web-dev">Web Development (Custom Site / Web App)</option>
-                        <option value="design">Web Design (UI/UX, Brand, Redesign)</option>
-                        <option value="network">Network Infrastructure Installation</option>
-                        <option value="full-stack">Full Stack (Web + Network)</option>
-                        <option value="maintenance">Ongoing Support & Maintenance</option>
-                    </select>
+                <div class="info-card bg-white rounded-2xl border border-border-light p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-accent text-2xl">mail</span>
+                    </div>
+                    <h3 class="font-semibold text-midnight text-sm mb-1">Email</h3>
+                    <a href="mailto:info@wecanbuildthat.com" class="text-accent font-semibold hover:text-accent-dark transition-colors text-sm">info@wecanbuildthat.com</a>
+                    <p class="text-text-muted text-xs mt-1">We reply within 1 business day</p>
                 </div>
-
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2" for="message">Project Vision Details</label>
-                    <textarea class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light h-36 focus:ring-accent focus:border-accent gold-focus" id="message" placeholder="Tell us about your project — technical requirements, current stack, integration needs, timeline, and business goals..." required></textarea>
+                <div class="info-card bg-white rounded-2xl border border-border-light p-6 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-accent text-2xl">location_on</span>
+                    </div>
+                    <h3 class="font-semibold text-midnight text-sm mb-1">Office</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">100 BlackMountain Way, Suite 500<br/>Elk Grove, CA 95624</p>
                 </div>
-
-                <div class="pt-4">
-                        <button class="w-full bg-accent text-primary py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10" type="submit">
-                            Send Project Request
-                        </button>
+                <div class="info-card bg-accent rounded-2xl p-6 shadow-md shadow-accent/20">
+                    <span class="material-symbols-outlined text-white text-2xl mb-3 block">verified</span>
+                    <h3 class="font-semibold text-white text-sm mb-2">Why WeCanBuildThat?</h3>
+                    <ul class="space-y-1.5 text-sm text-blue-100">
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-base">check</span>BICSI Certified Engineers</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-base">check</span>Cisco Partner Network</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-base">check</span>Free initial consultation</li>
+                        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-white text-base">check</span>200+ projects delivered</li>
+                    </ul>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
 </main>
 
 <!-- Footer -->
-<footer class="bg-obsidian-dark border-t border-surface-light/30">
-    <div class="max-w-[1280px] mx-auto py-16 px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+<footer class="bg-midnight border-t border-white/10 mt-16">
+    <div class="max-w-[1280px] mx-auto py-16 px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
         <div class="max-w-sm">
             <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
-                <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
+                <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl">terminal</span></div>
+                <span class="text-lg font-bold font-serif text-white tracking-tight">WeCanBuildThat</span>
             </div>
-            <p class="text-text-muted text-sm leading-relaxed mb-6">
-                Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.
-            </p>
-            <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
+            <p class="text-xs text-gray-500">© 2026 WeCanBuildThat. All Rights Reserved.</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=web-dev">Web Development</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=design">Web Design</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Development</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=design">Web Design</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html">Our Work</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="estimator.html">Cost Estimator</a></li>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html">Our Work</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="contact.html">Contact Us</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="estimator.html">Estimator</a></li>
                 </ul>
             </div>
-            <div class="col-span-2 sm:col-span-1">
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">HQ Address</h4>
-                <p class="text-sm text-text-muted leading-relaxed">
-                    100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624
-                </p>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Address</h4>
+                <p class="text-sm text-gray-400 leading-relaxed">100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624</p>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-    document.getElementById('consultation-form').addEventListener('submit', (e) => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
+    hamburgerBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open')); });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
+
+    document.getElementById('consultation-form').addEventListener('submit', e => {
         e.preventDefault();
         alert('Thank you! A WeCanBuildThat team member will be in touch within 1 business day to discuss your project.');
         e.target.reset();
     });
 </script>
-
 </body>
 </html>
