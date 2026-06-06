@@ -9,20 +9,20 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#0b111e",
-                        accent: "#d4af37",
-                        "accent-dark": "#b49028",
-                        "slate-stone": "#565f6f",
-                        "obsidian-dark": "#060911",
-                        background: "#0b111e",
-                        surface: "#111827",
-                        "surface-light": "#1f2937",
-                        "text-light": "#f3f4f6",
-                        "text-muted": "#9ca3af"
+                        midnight: "#111827",
+                        "midnight-deep": "#0f172a",
+                        offwhite: "#fafafa",
+                        apple: "#f5f5f7",
+                        accent: "#2563eb",
+                        "accent-dark": "#1d4ed8",
+                        "accent-light": "#eff6ff",
+                        "border-light": "#e5e7eb",
+                        "text-body": "#374151",
+                        "text-muted": "#6b7280",
+                        "text-subtle": "#9ca3af"
                     },
                     fontFamily: {
                         serif: ["Newsreader", "serif"],
@@ -38,7 +38,7 @@
             vertical-align: middle;
         }
         body {
-            background-color: #0b111e;
+            background-color: #fafafa;
             -webkit-font-smoothing: antialiased;
         }
         .nav-link {
@@ -48,51 +48,90 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 1px;
+            height: 2px;
             bottom: -4px;
             left: 0;
-            background-color: #d4af37;
+            background-color: #2563eb;
             transition: width 0.3s ease;
+            border-radius: 2px;
         }
         .nav-link:hover::after {
             width: 100%;
         }
         .form-focus:focus {
-            border-color: #d4af37;
-            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.15);
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
         }
+        .section-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+        .tier-card.active-tier {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        #mobile-menu.open { transform: translateX(0); }
+        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+        body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
+        body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
+        body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
     </style>
 </head>
-<body class="font-sans text-text-light antialiased">
+<body class="font-sans text-midnight antialiased">
 
-<!-- Floating Luxury Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-primary/80 backdrop-blur-md border-b border-surface-light/40 shadow-xl">
-    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-8 h-20">
-        <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
-            <div class="flex flex-col">
-                <span class="text-xl font-bold tracking-wider font-serif text-white">WeCanBuildThat</span>
-                <span class="text-[9px] uppercase tracking-[0.25em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+<!-- NAVIGATION -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
+    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
+        <a href="index.html" class="flex items-center gap-3 select-none group">
+            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
+                <span class="material-symbols-outlined text-white text-xl">terminal</span>
             </div>
-        </div>
+            <div class="flex flex-col">
+                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+            </div>
+        </a>
         <div class="hidden md:flex items-center gap-8">
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="index.html" id="nav-home">Home</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="portfolio.html" id="nav-portfolio">Portfolio</a>
-            <a class="nav-link text-accent text-sm font-semibold tracking-wider uppercase" href="estimator.html" id="nav-estimator">Estimator</a>
-            <a class="nav-link text-text-muted hover:text-white text-sm font-semibold tracking-wider uppercase transition-colors" href="contact.html" id="nav-contact">Consultation</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="index.html">Home</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="portfolio.html">Portfolio</a>
+            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="estimator.html">Estimator</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="contact.html">Consultation</a>
         </div>
         <div class="flex items-center gap-4">
-            <a href="estimator.html" class="bg-accent text-primary px-6 py-2.5 rounded font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-lg shadow-accent/10 inline-block">Get Estimate</a>
+            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-md shadow-accent/20">Get Estimate</a>
+            <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
+                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+            </button>
         </div>
     </div>
 </nav>
 
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
+    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl shadow-lg" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
+</div>
+
 <main class="pt-32 pb-24">
     <!-- Header -->
-    <section class="max-w-[1280px] mx-auto px-8 mb-12">
+    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-12">
         <div class="max-w-3xl">
-            <span class="text-accent text-xs font-semibold uppercase tracking-[0.25em] mb-4 block">PROJECT BUDGET GUIDE</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-white mb-6">Project Cost Estimator</h1>
+            <span class="section-tag">PROJECT BUDGET GUIDE</span>
+            <h1 class="font-serif text-4xl md:text-5xl text-midnight mb-6">Project Cost Estimator</h1>
             <p class="text-text-muted text-base md:text-lg leading-relaxed">
                 Get an instant ballpark for your web development, design, or network infrastructure project. Adjust the inputs to match your needs.
             </p>
@@ -103,55 +142,55 @@
     <section class="max-w-[1280px] mx-auto px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <!-- Left Side: Controls -->
-            <div class="lg:col-span-7 bg-surface p-8 rounded-2xl border border-surface-light shadow-xl space-y-8">
-                <h2 class="font-serif text-2xl text-white pb-4 border-b border-surface-light/40">Project Customizations</h2>
+            <div class="lg:col-span-7 bg-white p-8 rounded-2xl border border-border-light shadow-sm space-y-8">
+                <h2 class="font-serif text-2xl text-midnight pb-4 border-b border-border-light">Project Customizations</h2>
                 
                 <!-- Project Type -->
                 <div>
                     <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Project Type</label>
-                    <select class="w-full bg-primary border border-surface-light rounded-lg px-4 py-3 text-text-light font-medium focus:ring-accent focus:border-accent form-focus" id="build-type" onchange="calculateEstimate()">
+                    <select class="w-full bg-offwhite border border-border-light rounded-lg px-4 py-3 text-midnight font-medium focus:ring-accent focus:border-accent form-focus" id="build-type" onchange="calculateEstimate()">
                         <option value="website-standard">Business Website ($3,500 base)</option>
                         <option value="website-custom">Custom Web Application ($8,000 base)</option>
-                        <option value="ecommerce">E-Commerce Platform ($6,000 base)</option>
+                        <option value="printing-3d">3D Printing & Prototyping ($1,200 base)</option>
                         <option value="network-small">Network Install — Small Office ($2,500 base)</option>
                         <option value="network-enterprise">Network Install — Enterprise ($7,500 base)</option>
                     </select>
                 </div>
-
+ 
                 <!-- Range Slider: Sq Ft -->
                 <div>
                     <div class="flex justify-between items-center mb-3">
-                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold">Number of Pages / Network Drops</label>
+                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold" id="slider-label">Number of Pages / Views</label>
                         <span class="text-accent font-bold font-serif text-lg" id="sqft-val">10</span>
                     </div>
-                    <input class="w-full accent-accent bg-surface-light rounded-lg h-2" id="sqft-slider" max="50" min="1" oninput="calculateEstimate()" step="1" type="range" value="10"/>
+                    <input class="w-full accent-accent bg-border-light rounded-lg h-2" id="sqft-slider" max="50" min="1" oninput="calculateEstimate()" step="1" type="range" value="10"/>
                     <div class="flex justify-between text-xs text-text-muted mt-2">
                         <span>1</span>
                         <span>50</span>
                     </div>
                 </div>
-
+ 
                 <!-- Finishes Selection -->
                 <div>
                     <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Service Tier</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all active-tier">
                             <input checked class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="standard"/>
                             <span class="material-symbols-outlined text-accent text-3xl mb-2">rocket_launch</span>
-                            <span class="text-sm font-semibold text-white">Starter</span>
+                            <span class="text-sm font-semibold text-midnight">Starter</span>
                             <span class="text-xs text-text-muted mt-1">Included</span>
                         </label>
-                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all">
                             <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="premium"/>
                             <span class="material-symbols-outlined text-accent text-3xl mb-2">hotel_class</span>
-                            <span class="text-sm font-semibold text-white">Professional</span>
-                            <span class="text-xs text-text-muted mt-1">+25% — Advanced features</span>
+                            <span class="text-sm font-semibold text-midnight">Professional</span>
+                            <span class="text-xs text-text-muted mt-1">+25% — Advanced</span>
                         </label>
-                        <label class="bg-primary border border-surface-light hover:border-accent/40 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none">
+                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all">
                             <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="bespoke"/>
                             <span class="material-symbols-outlined text-accent text-3xl mb-2">diamond</span>
-                            <span class="text-sm font-semibold text-white">Enterprise</span>
-                            <span class="text-xs text-text-muted mt-1">+50% — Full custom build</span>
+                            <span class="text-sm font-semibold text-midnight">Enterprise</span>
+                            <span class="text-xs text-text-muted mt-1">+50% — Custom</span>
                         </label>
                     </div>
                 </div>
@@ -159,35 +198,35 @@
 
             <!-- Right Side: Display -->
             <div class="lg:col-span-5 sticky top-28">
-                <div class="bg-gradient-to-br from-surface to-primary p-8 rounded-2xl border border-surface-light shadow-2xl relative overflow-hidden group">
-                    <div class="absolute -right-16 -top-16 w-36 h-36 bg-accent/5 rounded-full blur-2xl"></div>
+                <div class="bg-gradient-to-br from-midnight-deep to-midnight p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden group">
+                    <div class="absolute -right-16 -top-16 w-36 h-36 bg-accent/10 rounded-full blur-2xl"></div>
                     
                     <h3 class="font-serif text-2xl text-white mb-6">Estimated Valuation</h3>
                     
-                    <div class="space-y-6 pb-6 border-b border-surface-light/40">
+                    <div class="space-y-6 pb-6 border-b border-white/10">
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Base Project Cost:</span>
+                            <span class="text-gray-400">Base Project Cost:</span>
                             <span class="text-white font-medium" id="base-cost">$3,500</span>
                         </div>
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Tier Upgrade:</span>
+                            <span class="text-gray-400">Tier Upgrade:</span>
                             <span class="text-white font-medium" id="upgrade-cost">$0</span>
                         </div>
                         <div class="flex justify-between items-center text-sm">
-                            <span class="text-text-muted">Discovery & Strategy:</span>
+                            <span class="text-gray-400">Discovery & Strategy:</span>
                             <span class="text-white font-medium" id="eng-cost">$350</span>
                         </div>
                     </div>
-
+ 
                     <div class="pt-6 pb-8">
-                        <span class="text-xs uppercase tracking-wider text-text-muted font-bold block mb-1">TOTAL ESTIMATED BUDGET</span>
-                        <span class="text-4xl md:text-5xl font-serif text-accent font-bold tracking-tight" id="total-val">$1,323,000</span>
-                        <p class="text-xs text-text-muted mt-3 leading-relaxed">
+                        <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block mb-1">TOTAL ESTIMATED BUDGET</span>
+                        <span class="text-4xl md:text-5xl font-serif text-blue-400 font-bold tracking-tight" id="total-val">$1,323,000</span>
+                        <p class="text-xs text-gray-400 mt-3 leading-relaxed">
                             *This is a ballpark estimate. Final pricing is determined after a free discovery call and detailed scoping session.
                         </p>
                     </div>
-
-                    <a href="contact.html" class="w-full bg-accent text-primary text-center py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 block">
+ 
+                    <a href="contact.html" class="w-full bg-accent text-white text-center py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 block shadow-lg shadow-accent/20">
                         Start Your Project
                     </a>
                 </div>
@@ -201,11 +240,11 @@
     <div class="max-w-[1280px] mx-auto py-16 px-8 flex flex-col md:flex-row justify-between items-start gap-12">
         <div class="max-w-sm">
             <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-accent text-3xl">architecture</span>
+                <span class="material-symbols-outlined text-accent text-3xl">terminal</span>
                 <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
             </div>
             <p class="text-text-muted text-sm leading-relaxed mb-6">
-                Premium custom residential, general contracting, and commercial architectural execution. A proud member of the BlackMountain Development Company group.
+                Premium web design & development, 3D printing & prototyping, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.
             </p>
             <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
         </div>
@@ -213,9 +252,9 @@
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
                 <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=residential">Custom Residential</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=commercial">Corporate Workspaces</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="contact.html">Planning &amp; Blueprints</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=web-dev">Web Design & Dev</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=3d-printing">3D Printing</a></li>
+                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
                 </ul>
             </div>
             <div>
@@ -237,20 +276,51 @@
 </footer>
 
 <script>
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open'));
+        });
+    }
+
+    function updateTierSelection() {
+        document.querySelectorAll('.tier-card').forEach(card => {
+            const input = card.querySelector('input');
+            if (input.checked) {
+                card.classList.add('active-tier');
+            } else {
+                card.classList.remove('active-tier');
+            }
+        });
+    }
+
     function calculateEstimate() {
         const buildType = document.getElementById('build-type').value;
         const qty = parseInt(document.getElementById('sqft-slider').value);
         document.getElementById('sqft-val').innerText = qty;
 
+        const labelEl = document.getElementById('slider-label');
+        if (buildType === 'printing-3d') {
+            labelEl.innerText = 'Number of Parts / Prototypes';
+        } else if (buildType.startsWith('network')) {
+            labelEl.innerText = 'Number of Network Drops';
+        } else {
+            labelEl.innerText = 'Number of Pages / Views';
+        }
+
+        updateTierSelection();
+
         // Base rates by project type
         const baseRates = {
             'website-standard': 3500,
             'website-custom': 8000,
-            'ecommerce': 6000,
+            'printing-3d': 1200,
             'network-small': 2500,
             'network-enterprise': 7500
         };
-        let baseCost = (baseRates[buildType] || 3500) + (qty - 1) * 200;
+        let baseCost = (baseRates[buildType] || 3500) + (qty - 1) * (buildType === 'printing-3d' ? 80 : 200);
 
         const finishOption = document.querySelector('input[name="finishes"]:checked').value;
         let finishModifier = 0.0;

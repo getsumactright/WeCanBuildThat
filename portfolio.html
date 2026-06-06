@@ -120,8 +120,8 @@
     <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-12 reveal">
         <div class="flex flex-wrap gap-3 border-b border-border-light pb-8">
             <button class="filter-btn active px-5 py-2 rounded-lg font-semibold text-sm border border-accent/30 transition-all duration-300" onclick="filterProjects('all')" id="btn-filter-all">All Projects</button>
-            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('web-dev')" id="btn-filter-web-dev">Web Development</button>
-            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('design')" id="btn-filter-design">Web Design</button>
+            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('web-dev')" id="btn-filter-web-dev">Web Design & Dev</button>
+            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('3d-printing')" id="btn-filter-3d-printing">3D Printing</button>
             <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('network')" id="btn-filter-network">Network Infrastructure</button>
         </div>
     </section>
@@ -134,7 +134,7 @@
                 <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_dev.png','FinTech Client Portal — Sacramento, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_dev.png" alt="FinTech Client Portal"/>
                     <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Web Dev</span>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
                 </div>
                 <div class="p-6">
                     <h3 class="font-serif text-xl text-midnight mb-2">FinTech Client Portal</h3>
@@ -146,11 +146,11 @@
                 </div>
             </div>
 
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="design">
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="web-dev">
                 <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png','Luxury Brand Redesign — Elk Grove, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="Luxury Brand Redesign"/>
                     <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design</span>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
                 </div>
                 <div class="p-6">
                     <h3 class="font-serif text-xl text-midnight mb-2">Luxury Brand Redesign</h3>
@@ -182,7 +182,7 @@
                 <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/hero_tech.png','Data Center Dashboard — Elk Grove, CA')">
                     <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/hero_tech.png" alt="Data Center Dashboard"/>
                     <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Web Dev</span>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
                 </div>
                 <div class="p-6">
                     <h3 class="font-serif text-xl text-midnight mb-2">Data Center Dashboard</h3>
@@ -210,18 +210,18 @@
                 </div>
             </div>
 
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-400" data-category="design">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png','E-Commerce Platform Design — Sacramento, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="E-Commerce Platform"/>
+            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-400" data-category="3d-printing">
+                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/3d_printing.png','Custom Enclosure Prototyping — Elk Grove, CA')">
+                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/3d_printing.png" alt="Custom Enclosure Prototyping"/>
                     <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design</span>
+                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">3D Printing</span>
                 </div>
                 <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">E-Commerce Platform</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">End-to-end UX/UI design — user journey mapping, high-fidelity Figma prototypes, and a full design system handoff for a premium e-commerce brand.</p>
+                    <h3 class="font-serif text-xl text-midnight mb-2">Custom Enclosure Prototyping</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-4">High-fidelity 3D modeling and rapid prototyping of an engineered ABS casing for an IoT hardware manufacturer, completed on tight tolerances.</p>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Sacramento, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Figma · UX</span>
+                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
+                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">ABS · CAD modeling</span>
                     </div>
                 </div>
             </div>
@@ -255,7 +255,7 @@
                 <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl">terminal</span></div>
                 <span class="text-lg font-bold font-serif text-white tracking-tight">WeCanBuildThat</span>
             </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web design & development, 3D printing & prototyping, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
             <div class="flex flex-col gap-2 mb-4">
                 <a href="tel:+19165550100" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">call</span>(916) 555-0100</a>
                 <a href="mailto:info@wecanbuildthat.com" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">mail</span>info@wecanbuildthat.com</a>
@@ -266,8 +266,8 @@
             <div>
                 <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
                 <ul class="space-y-2.5 text-sm text-gray-400">
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Development</a></li>
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=design">Web Design</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Design & Dev</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=3d-printing">3D Printing</a></li>
                     <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
                 </ul>
             </div>
