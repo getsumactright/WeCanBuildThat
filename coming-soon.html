@@ -522,9 +522,10 @@
       >
 
       <div class="signup">
-        <form class="signup-form" id="signup-form" novalidate>
+        <form class="signup-form" id="signup-form" action="https://formspree.io/f/xgogkwwp" method="POST" novalidate>
           <label for="email" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
           <input type="email" id="email" name="email" placeholder="name@company.com" autocomplete="email" inputmode="email" required>
+          <input type="hidden" name="_subject" value="New WeCanBuildThat launch signup">
           <button type="submit" id="signup-btn">
             <span id="signup-btn-text">Notify me</span>
           </button>
@@ -624,30 +625,54 @@
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
   }
 
-  // Fake-submit email signup (no backend wired yet — swap for a real endpoint,
-  // e.g. Formspree / Mailchimp / a serverless function, before launch)
+  // Email signup — posts to Formspree (https://formspree.io/f/xgogkwwp).
+  // Uses fetch + Accept:application/json so Formspree returns JSON instead of
+  // redirecting, letting us show the inline success/error state below.
   var form = document.getElementById('signup-form');
   var btn = document.getElementById('signup-btn');
   var btnText = document.getElementById('signup-btn-text');
   var success = document.getElementById('signup-success');
   var note = document.getElementById('signup-note');
   var emailInput = document.getElementById('email');
+  var noteDefaultText = note.textContent;
+
+  function setNote(text, isError){
+    note.textContent = text;
+    note.style.color = isError ? 'var(--blue)' : '';
+  }
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     if (!emailInput.checkValidity()){
       emailInput.focus();
-      note.textContent = 'Enter a valid email address.';
-      note.style.color = 'var(--blue)';
+      setNote('Enter a valid email address.', true);
       return;
     }
+
     btn.disabled = true;
     btnText.innerHTML = '<span class="spinner" aria-hidden="true"></span>';
-    setTimeout(function(){
-      form.style.display = 'none';
-      success.classList.add('show');
-      note.style.display = 'none';
-    }, 650);
+    setNote(noteDefaultText, false);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response){
+      if (response.ok){
+        form.style.display = 'none';
+        success.classList.add('show');
+        note.style.display = 'none';
+      } else {
+        return response.json().then(function(data){
+          var message = (data && data.errors && data.errors.map(function(err){ return err.message; }).join(', ')) || 'Something went wrong. Please try again.';
+          throw new Error(message);
+        });
+      }
+    }).catch(function(){
+      btn.disabled = false;
+      btnText.textContent = 'Notify me';
+      setNote('Something went wrong — please try again, or email us directly.', true);
+    });
   });
 </script>
 
