@@ -50,11 +50,19 @@
         #lightbox { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
         .delay-100 { transition-delay: 0.1s; }
         .delay-200 { transition-delay: 0.2s; }
         .delay-300 { transition-delay: 0.3s; }
         .delay-400 { transition-delay: 0.4s; }
         .section-tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+        /* Flex (not grid) so filtered results with 1-2 cards center instead of
+           hugging the left edge with a lopsided gap on the right */
+        #portfolio-grid .project-card { width: 100%; }
+        @media (min-width: 768px) { #portfolio-grid .project-card { width: calc(50% - 1rem); } }
+        @media (min-width: 1024px) { #portfolio-grid .project-card { width: calc(33.333% - 1.334rem); } }
     </style>
 </head>
 <body class="font-sans text-midnight antialiased">
@@ -128,7 +136,7 @@
 
     <!-- Portfolio Grid -->
     <section class="max-w-[1280px] mx-auto px-6 md:px-8">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+        <div class="flex flex-wrap justify-center gap-8" id="portfolio-grid">
 
             <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-100" data-category="web-dev">
                 <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_dev.png','FinTech Client Portal — Sacramento, CA')">
@@ -300,6 +308,7 @@
     const revealEls = document.querySelectorAll('.reveal');
     const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     revealEls.forEach(el => obs.observe(el));
+    setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2000);
 
     function filterProjects(category) {
         document.querySelectorAll('.filter-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.add('text-text-muted'); });

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>WeCanBuildThat | Web Development, Web Design & Network Infrastructure — Elk Grove, CA</title>
+    <meta name="description" content="WeCanBuildThat is a BlackMountain company delivering premium web development, stunning web design, and enterprise network infrastructure installation across Northern California."/>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: "#111827",
+                        "midnight-deep": "#0f172a",
+                        offwhite: "#fafafa",
+                        apple: "#f5f5f7",
+                        accent: "#2563eb",
+                        "accent-dark": "#1d4ed8",
+                        "accent-light": "#eff6ff",
+                        "border-light": "#e5e7eb",
+                        "text-body": "#374151",
+                        "text-muted": "#6b7280",
+                        "text-subtle": "#9ca3af"
+                    },
+                    fontFamily: {
+                        serif: ["Newsreader", "serif"],
+                        sans: ["Plus Jakarta Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        body { background-color: #fafafa; -webkit-font-smoothing: antialiased; }
+
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #2563eb; transition: width 0.3s ease; border-radius: 2px; }
+        .nav-link:hover::after { width: 100%; }
+
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        #mobile-menu.open { transform: translateX(0); }
+        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+        body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
+        body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
+        body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* Hero stays dark for dramatic effect */
+        .ken-burns { animation: kenburns 30s ease infinite alternate; }
+        @keyframes kenburns { 0% { transform: scale(1); } 100% { transform: scale(1.07) translate(-1%, -0.5%); } }
+
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal, .reveal-left, .reveal-right { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+
+        .service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(37,99,235,0.1); }
+
+        .testimonial-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.07); }
+
+        .tech-grid-overlay {
+            background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .blue-text {
+            background: linear-gradient(135deg, #2563eb, #60a5fa, #1d4ed8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+
+        .stat-card { border: 1px solid #e5e7eb; transition: border-color 0.3s, box-shadow 0.3s; }
+        .stat-card:hover { border-color: #bfdbfe; box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+
+        .process-connector { position: absolute; top: 28px; left: calc(50% + 28px); width: calc(100% - 56px); height: 1px; background: linear-gradient(to right, #2563eb, #bfdbfe); }
+
+        .portfolio-card { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+        .portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="font-sans text-midnight antialiased">
+
+<!-- ─── NAVIGATION ─── -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
+    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
+        <a href="index.html" class="flex items-center gap-3 select-none group">
+            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
+                <span class="material-symbols-outlined text-white text-xl">terminal</span>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
+                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
+            </div>
+        </a>
+        <div class="hidden md:flex items-center gap-8">
+            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="index.html">Home</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="portfolio.html">Portfolio</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="estimator.html">Estimator</a>
+            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="contact.html">Consultation</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-md shadow-accent/20">Get Estimate</a>
+            <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
+                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
+                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
+    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
+    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl shadow-lg" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
+</div>
+
+<!-- ─── HERO (stays dark for drama) ─── -->
+<main class="pt-20">
+    <section class="relative h-screen flex items-center overflow-hidden bg-midnight-deep" id="hero">
+        <div class="absolute inset-0 z-0">
+            <img class="w-full h-full object-cover opacity-40 ken-burns" src="images/hero_tech.png" alt="WeCanBuildThat network infrastructure"/>
+            <div class="absolute inset-0 bg-gradient-to-r from-midnight-deep via-midnight-deep/80 to-midnight-deep/30"></div>
+            <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-midnight-deep to-transparent"></div>
+            <div class="absolute tech-grid-overlay inset-0 opacity-40"></div>
+        </div>
+
+        <div class="relative z-10 max-w-[1280px] mx-auto px-6 md:px-8 w-full">
+            <div class="max-w-2xl">
+                <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-blue-300 font-semibold text-xs tracking-[0.3em] px-4 py-1.5 mb-8 rounded-full border border-white/15">
+                    <span class="material-symbols-outlined text-sm">hub</span>
+                    WEB & DESIGN · 3D PRINTING · NETWORK INFRASTRUCTURE
+                </span>
+                <h1 class="font-serif text-5xl md:text-7xl text-white mb-6 leading-[1.05] drop-shadow-xl">
+                    We Build the <br/><span class="italic font-light blue-text">Digital Future.</span>
+                </h1>
+                <p class="text-base md:text-lg text-gray-300 mb-10 max-w-lg leading-relaxed">
+                    Custom web development, stunning web design, and enterprise network infrastructure — built to perform. If you can imagine it, <span class="text-white font-semibold">we can build that.</span>
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="portfolio.html" class="bg-accent text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-accent/30 hover:bg-accent-dark transition-all duration-300 active:scale-95" id="btn-hero-portfolio">See Our Work</a>
+                    <a href="contact.html" class="border border-white/30 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 active:scale-95" id="btn-hero-consult">Free Consultation</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40 z-10">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-gray-400">Scroll</span>
+            <span class="material-symbols-outlined text-blue-400 text-xl animate-bounce">keyboard_double_arrow_down</span>
+        </div>
+    </section>
+
+    <!-- ─── STATS ─── -->
+    <section class="bg-offwhite">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8 -mt-1">
+            <div class="grid grid-cols-2 md:grid-cols-4 bg-white rounded-2xl shadow-xl border border-border-light overflow-hidden reveal">
+                <div class="stat-card py-10 px-6 text-center border-b md:border-b-0 border-r border-border-light">
+                    <p class="font-serif text-4xl font-bold text-accent stat-number" data-target="15" data-suffix="+">0+</p>
+                    <p class="text-xs text-text-muted uppercase tracking-widest mt-2 font-semibold">Years in Tech</p>
+                </div>
+                <div class="stat-card py-10 px-6 text-center border-b md:border-b-0 md:border-r border-border-light">
+                    <p class="font-serif text-4xl font-bold text-accent stat-number" data-target="200" data-suffix="+">0+</p>
+                    <p class="text-xs text-text-muted uppercase tracking-widest mt-2 font-semibold">Projects Delivered</p>
+                </div>
+                <div class="stat-card py-10 px-6 text-center border-r border-border-light">
+                    <p class="font-serif text-4xl font-bold text-accent stat-number" data-target="100" data-suffix="%">0%</p>
+                    <p class="text-xs text-text-muted uppercase tracking-widest mt-2 font-semibold">Client Satisfaction</p>
+                </div>
+                <div class="stat-card py-10 px-6 text-center">
+                    <p class="font-serif text-4xl font-bold text-accent stat-number" data-target="50" data-suffix="+">0+</p>
+                    <p class="text-xs text-text-muted uppercase tracking-widest mt-2 font-semibold">Network Installs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── ABOUT ─── -->
+    <section class="py-28 bg-white border-t border-border-light">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left">
+                    <span class="section-tag">The BlackMountain Legacy</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-midnight mb-6 leading-tight">Technology Built for <em class="font-light italic text-accent">Real People</em></h2>
+                    <p class="text-text-body text-base mb-6 leading-relaxed">
+                        As a BlackMountain Development Company, WeCanBuildThat brings enterprise-grade web and network solutions to businesses of every size. We don't just build websites — we build digital infrastructure that drives growth, trust, and results.
+                    </p>
+                    <p class="text-text-body text-base mb-8 leading-relaxed">
+                        From high-performance web applications to structured cabling and wireless network design, our certified team handles the full technology stack so you can focus on running your business.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="portfolio.html" class="bg-accent text-white font-semibold px-7 py-3.5 rounded-xl hover:bg-accent-dark transition-all duration-300 text-sm shadow-md shadow-accent/20">View Our Work</a>
+                        <a href="contact.html" class="border border-border-light text-text-muted hover:border-accent hover:text-accent font-semibold px-7 py-3.5 rounded-xl transition-all duration-300 text-sm">Talk to Our Team</a>
+                    </div>
+                </div>
+                <div class="relative group reveal-right">
+                    <div class="absolute -inset-3 bg-accent-light rounded-2xl transition-all duration-500 group-hover:bg-blue-100"></div>
+                    <img alt="Premium web design workspace" class="relative rounded-xl shadow-xl w-full h-[460px] object-cover border border-border-light" src="images/web_design.png"/>
+                    <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 border border-border-light shadow-lg flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-accent text-xl">design_services</span>
+                        </div>
+                        <div>
+                            <p class="text-midnight text-sm font-semibold">UI/UX Design & Development</p>
+                            <p class="text-text-muted text-xs">From wireframe to pixel-perfect production</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── SERVICES ─── -->
+    <section class="py-28 bg-apple">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="section-tag">What We Build</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-midnight mb-4">Our Core Services</h2>
+                <p class="text-text-muted text-sm md:text-base">Three pillars of digital excellence — each delivered with precision, performance, and a premium finish.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm border border-border-light reveal delay-100">
+                    <div class="bg-accent-light w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-accent text-2xl">terminal</span>
+                    </div>
+                    <h3 class="font-serif text-xl text-midnight mb-3">Web Design & Dev</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-5">Stunning, brand-aligned interfaces engineered for speed, scalability, and security. We build full-stack web applications and custom websites that convert.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> UI/UX Wireframes & Brand Systems</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> React, Next.js, Node.js</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> SEO-Optimized & Responsive</li>
+                    </ul>
+                    <a href="portfolio.html?filter=web-dev" class="text-xs font-bold text-accent uppercase tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
+                        Design & Dev Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm border border-border-light reveal delay-200">
+                    <div class="bg-accent-light w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-accent text-2xl">view_in_ar</span>
+                    </div>
+                    <h3 class="font-serif text-xl text-midnight mb-3">3D Printing & Prototyping</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-5">High-fidelity 3D printing and rapid manufacturing. We transform digital CAD models into physical components, functional prototypes, and custom parts.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Rapid Prototyping & CAD Support</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Custom Enclosures & Mechanical Parts</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Multiple Engineering Materials</li>
+                    </ul>
+                    <a href="portfolio.html?filter=3d-printing" class="text-xs font-bold text-accent uppercase tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
+                        3D Printing Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm border border-border-light reveal delay-300">
+                    <div class="bg-accent-light w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                        <span class="material-symbols-outlined text-accent text-2xl">router</span>
+                    </div>
+                    <h3 class="font-serif text-xl text-midnight mb-3">Network Infrastructure</h3>
+                    <p class="text-text-muted text-sm leading-relaxed mb-5">Enterprise-grade structured cabling, wireless network design, and full infrastructure installation for offices, commercial spaces, and campuses.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Cat6A / Fiber Optic Cabling</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Wi-Fi 6E Design & Deployment</li>
+                        <li class="flex items-center gap-2 text-xs text-text-body"><span class="material-symbols-outlined text-accent text-base">check_circle</span> Server Room & Rack Build-Out</li>
+                    </ul>
+                    <a href="portfolio.html?filter=network" class="text-xs font-bold text-accent uppercase tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
+                        Network Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PROCESS ─── -->
+    <section class="py-28 bg-white border-t border-border-light">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="section-tag">How We Work</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-midnight mb-4">From Discovery to Launch</h2>
+                <p class="text-text-muted text-sm md:text-base">A streamlined, transparent process that keeps you informed at every step.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+                <div class="relative text-center reveal delay-100">
+                    <div class="hidden md:block process-connector"></div>
+                    <div class="w-14 h-14 rounded-full bg-accent-light border-2 border-accent/30 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-accent font-serif font-bold text-lg">01</span>
+                    </div>
+                    <h4 class="text-midnight font-semibold text-sm mb-2">Discovery</h4>
+                    <p class="text-text-muted text-xs leading-relaxed">We deep-dive into your goals, audience, and tech stack to map the right solution.</p>
+                </div>
+                <div class="relative text-center reveal delay-200">
+                    <div class="hidden md:block process-connector"></div>
+                    <div class="w-14 h-14 rounded-full bg-accent-light border-2 border-accent/30 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-accent font-serif font-bold text-lg">02</span>
+                    </div>
+                    <h4 class="text-midnight font-semibold text-sm mb-2">Design & Plan</h4>
+                    <p class="text-text-muted text-xs leading-relaxed">Wireframes, mockups, and network diagrams reviewed and approved before a single line of code.</p>
+                </div>
+                <div class="relative text-center reveal delay-300">
+                    <div class="hidden md:block process-connector"></div>
+                    <div class="w-14 h-14 rounded-full bg-accent-light border-2 border-accent/30 flex items-center justify-center mx-auto mb-4">
+                        <span class="text-accent font-serif font-bold text-lg">03</span>
+                    </div>
+                    <h4 class="text-midnight font-semibold text-sm mb-2">Build & Install</h4>
+                    <p class="text-text-muted text-xs leading-relaxed">Expert developers and certified engineers execute with precision and weekly progress updates.</p>
+                </div>
+                <div class="relative text-center reveal delay-400">
+                    <div class="w-14 h-14 rounded-full bg-accent flex items-center justify-center mx-auto mb-4 shadow-lg shadow-accent/25">
+                        <span class="material-symbols-outlined text-white text-2xl">rocket_launch</span>
+                    </div>
+                    <h4 class="text-midnight font-semibold text-sm mb-2">Launch & Support</h4>
+                    <p class="text-text-muted text-xs leading-relaxed">Go live with confidence — full handoff, training, and ongoing maintenance support included.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PORTFOLIO PREVIEW ─── -->
+    <section class="py-28 bg-apple border-t border-border-light">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4 reveal">
+                <div>
+                    <span class="section-tag">Featured Work</span>
+                    <h2 class="font-serif text-3xl md:text-4xl text-midnight">Recent Projects</h2>
+                </div>
+                <a href="portfolio.html" class="text-accent text-sm font-bold uppercase tracking-wider flex items-center gap-1 hover:gap-2 transition-all">
+                    Full Portfolio <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden border border-border-light reveal delay-100">
+                    <div class="h-52 overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="images/web_dev.png" alt="Web Development Project"/>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-accent bg-accent-light px-2 py-0.5 rounded">Web Development</span>
+                        <h3 class="font-serif text-lg text-midnight mt-2">FinTech Client Portal</h3>
+                        <p class="text-text-muted text-xs mt-1">Sacramento, CA · React · Node.js</p>
+                    </div>
+                </div>
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden border border-border-light reveal delay-200">
+                    <div class="h-52 overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="images/3d_printing.png" alt="3D Printing Project"/>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-accent bg-accent-light px-2 py-0.5 rounded">3D Printing</span>
+                        <h3 class="font-serif text-lg text-midnight mt-2">Custom Enclosure Prototyping</h3>
+                        <p class="text-text-muted text-xs mt-1">Elk Grove, CA · ABS · CAD Modeling</p>
+                    </div>
+                </div>
+                <div class="portfolio-card bg-white rounded-2xl overflow-hidden border border-border-light reveal delay-300">
+                    <div class="h-52 overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="images/network_infra.png" alt="Network Infrastructure"/>
+                    </div>
+                    <div class="p-5">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-accent bg-accent-light px-2 py-0.5 rounded">Network Infrastructure</span>
+                        <h3 class="font-serif text-lg text-midnight mt-2">Corporate Campus Network</h3>
+                        <p class="text-text-muted text-xs mt-1">Folsom, CA · Cat6A · Wi-Fi 6E</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ─── -->
+    <section class="py-28 bg-white border-t border-border-light">
+        <div class="max-w-[1280px] mx-auto px-6 md:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <span class="section-tag">Client Stories</span>
+                <h2 class="font-serif text-3xl md:text-4xl text-midnight mb-4">Trusted by NorCal Businesses</h2>
+                <p class="text-text-muted text-sm md:text-base">Here's what clients say about working with the WeCanBuildThat team.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-offwhite rounded-2xl p-8 border border-border-light reveal delay-100">
+                    <div class="flex gap-1 mb-4">
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                    </div>
+                    <p class="text-text-body text-sm leading-relaxed mb-6 italic">"They redesigned our entire website and the results were immediate — traffic up 40%, bounce rate down significantly. The team is professional, fast, and genuinely talented."</p>
+                    <div class="flex items-center gap-3 border-t border-border-light pt-5">
+                        <div class="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center">
+                            <span class="text-accent font-serif font-bold">M</span>
+                        </div>
+                        <div>
+                            <p class="text-midnight text-sm font-semibold">Marcus T., CEO</p>
+                            <p class="text-text-muted text-xs">Web Design · Elk Grove, CA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-offwhite rounded-2xl p-8 border border-border-light reveal delay-200">
+                    <div class="flex gap-1 mb-4">
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                    </div>
+                    <p class="text-text-body text-sm leading-relaxed mb-6 italic">"WeCanBuildThat wired our entire 12,000 sq ft office — Cat6A, Wi-Fi 6E access points, the works. Zero issues since go-live, and the cable management looks immaculate."</p>
+                    <div class="flex items-center gap-3 border-t border-border-light pt-5">
+                        <div class="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center">
+                            <span class="text-accent font-serif font-bold">J</span>
+                        </div>
+                        <div>
+                            <p class="text-midnight text-sm font-semibold">Jennifer R., COO</p>
+                            <p class="text-text-muted text-xs">Network Infra · Sacramento, CA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card bg-offwhite rounded-2xl p-8 border border-border-light reveal delay-300">
+                    <div class="flex gap-1 mb-4">
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                        <span class="material-symbols-outlined text-amber-400 text-lg" style="font-variation-settings:'FILL' 1">star</span>
+                    </div>
+                    <p class="text-text-body text-sm leading-relaxed mb-6 italic">"Our custom web app was delivered on time and under budget. The code is clean, well-documented, and the team was responsive throughout. Absolutely recommend them."</p>
+                    <div class="flex items-center gap-3 border-t border-border-light pt-5">
+                        <div class="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center">
+                            <span class="text-accent font-serif font-bold">D</span>
+                        </div>
+                        <div>
+                            <p class="text-midnight text-sm font-semibold">David K., Founder</p>
+                            <p class="text-text-muted text-xs">Web Development · Folsom, CA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CTA (dark contrast section) ─── -->
+    <section class="relative py-28 bg-midnight-deep overflow-hidden">
+        <div class="absolute inset-0 tech-grid-overlay opacity-20"></div>
+        <div class="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+        <div class="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10 max-w-[900px] mx-auto text-center px-6 md:px-8 reveal">
+            <span class="inline-flex items-center gap-2 bg-white/10 border border-white/15 text-blue-300 text-xs font-bold tracking-[0.25em] uppercase px-4 py-1.5 rounded-full mb-6">
+                <span class="material-symbols-outlined text-sm">bolt</span>READY TO BUILD?
+            </span>
+            <h2 class="font-serif text-3xl md:text-5xl text-white mb-6 leading-tight">Have a project <em class="italic font-light blue-text">in mind?</em></h2>
+            <p class="text-gray-400 text-base md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">Whether it's a brand-new website, a custom web app, or a full office network build-out — our team is ready to make it happen.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="estimator.html" class="bg-accent text-white font-semibold px-10 py-4 rounded-xl hover:bg-accent-dark transition-all duration-300 shadow-lg shadow-accent/25" id="btn-cta-estimate">Get a Free Estimate</a>
+                <a href="contact.html" class="border border-white/25 text-white font-semibold px-10 py-4 rounded-xl hover:bg-white/10 transition-all duration-300" id="btn-cta-consult">Book a Consultation</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="bg-midnight border-t border-white/10">
+    <div class="max-w-[1280px] mx-auto py-16 px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
+        <div class="max-w-sm">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-xl">terminal</span>
+                </div>
+                <span class="text-lg font-bold font-serif text-white tracking-tight">WeCanBuildThat</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web development, web design, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
+            <div class="flex flex-col gap-2 mb-6">
+                <a href="tel:+19165550100" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
+                    <span class="material-symbols-outlined text-accent text-base">call</span>(916) 555-0100
+                </a>
+                <a href="mailto:info@wecanbuildthat.com" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors">
+                    <span class="material-symbols-outlined text-accent text-base">mail</span>info@wecanbuildthat.com
+                </a>
+                <span class="flex items-center gap-2 text-sm text-gray-400">
+                    <span class="material-symbols-outlined text-accent text-base">location_on</span>100 BlackMountain Way, Suite 500, Elk Grove, CA 95624
+                </span>
+            </div>
+            <p class="text-xs text-gray-500">© 2026 WeCanBuildThat. All Rights Reserved.</p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Design & Dev</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=3d-printing">3D Printing & Prototyping</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="estimator.html">Project Estimator</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html">Our Work</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="contact.html">Contact Us</a></li>
+                    <li><a class="hover:text-blue-400 transition-colors" href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-span-2 sm:col-span-1">
+                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Hours</h4>
+                <div class="space-y-1 text-sm text-gray-400">
+                    <p>Mon – Fri: 8:00 AM – 6:00 PM</p>
+                    <p>Sat: By Appointment</p>
+                    <p class="text-xs mt-2 text-gray-500">Licensed · Bonded · Insured</p>
+                    <p class="text-xs text-gray-500">BICSI Certified · Cisco Partner</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
+    hamburgerBtn.addEventListener('click', () => {
+        mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open'));
+    });
+
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+    // Safety net: guarantee visibility even if the observer never fires (hidden tab, edge case)
+    setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2000);
+
+    const statEls = document.querySelectorAll('.stat-number');
+    let statsRan = false;
+    const statsObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsRan) {
+                statsRan = true;
+                statEls.forEach(el => {
+                    const target = parseInt(el.dataset.target);
+                    const suffix = el.dataset.suffix || '';
+                    let current = 0;
+                    const step = target / (1500 / 16);
+                    const timer = setInterval(() => {
+                        current = Math.min(current + step, target);
+                        el.textContent = Math.round(current) + suffix;
+                        if (current >= target) clearInterval(timer);
+                    }, 16);
+                });
+            }
+        });
+    }, { threshold: 0.5 });
+    if (statEls.length) statsObs.observe(document.querySelector('.stat-number').closest('section') || document.body);
+</script>
+</body>
+</html>
