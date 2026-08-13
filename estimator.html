@@ -1,346 +1,307 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Project Estimator | WeCanBuildThat — Web Dev, Design & Network Infrastructure</title>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        midnight: "#111827",
-                        "midnight-deep": "#0f172a",
-                        offwhite: "#fafafa",
-                        apple: "#f5f5f7",
-                        accent: "#2563eb",
-                        "accent-dark": "#1d4ed8",
-                        "accent-light": "#eff6ff",
-                        "border-light": "#e5e7eb",
-                        "text-body": "#374151",
-                        "text-muted": "#6b7280",
-                        "text-subtle": "#9ca3af"
-                    },
-                    fontFamily: {
-                        serif: ["Newsreader", "serif"],
-                        sans: ["Plus Jakarta Sans", "sans-serif"]
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        body {
-            background-color: #fafafa;
-            -webkit-font-smoothing: antialiased;
-        }
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #2563eb;
-            transition: width 0.3s ease;
-            border-radius: 2px;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .form-focus:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-        }
-        .section-tag {
-            display: inline-block;
-            background: #eff6ff;
-            color: #2563eb;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 100px;
-            margin-bottom: 16px;
-        }
-        .tier-card.active-tier {
-            border-color: #2563eb;
-            background-color: #eff6ff;
-        }
-        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        #mobile-menu.open { transform: translateX(0); }
-        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-        body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
-        body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
-        body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cost estimator — We Can Build That</title>
+<meta name="description" content="Get a ballpark figure for a website, 3D printing run, or network install before you talk to anyone.">
+<meta property="og:title" content="Cost estimator — We Can Build That">
+<meta property="og:description" content="Get a ballpark figure before you talk to anyone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Outfit:wght@900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .est-grid{display:grid;grid-template-columns:1fr 380px;gap:clamp(28px,4vw,52px);
+    align-items:start;padding-bottom:clamp(48px,6vw,80px)}
+  .est-form{padding:clamp(24px,3.5vw,34px)}
+  .est-form h2{font-size:22px;margin-bottom:6px}
+  .est-form .lead{font-size:14.5px;color:var(--muted);margin-bottom:26px}
+
+  .slider-head{display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:10px;gap:12px}
+  .slider-val{font-family:var(--font-display);font-size:22px;font-weight:800;
+    color:var(--blue);letter-spacing:-.02em}
+  /* 44px tall so the whole strip is a valid touch target — the visible track
+     stays 5px; the extra height is transparent padding around it. */
+  input[type=range]{width:100%;height:44px;background:transparent;cursor:pointer;
+    appearance:none;-webkit-appearance:none}
+  input[type=range]::-webkit-slider-runnable-track{height:5px;border-radius:3px;
+    background:var(--line)}
+  input[type=range]::-moz-range-track{height:5px;border-radius:3px;background:var(--line)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;
+    border-radius:50%;background:var(--blue);border:3px solid var(--white);
+    box-shadow:0 1px 3px rgba(27,26,23,.22);margin-top:-9.5px;
+    transition:transform var(--dur-fast) var(--ease)}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;
+    background:var(--blue);border:3px solid var(--white);
+    box-shadow:0 1px 3px rgba(27,26,23,.22)}
+  input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.08)}
+  .slider-ends{display:flex;justify-content:space-between;font-family:var(--font-mono);
+    font-size:11px;color:var(--muted);margin-top:2px}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  /* .tier is a <label>, so site.css's `.field label` rule (0,1,1) applies its
+     uppercase/mono treatment. Scoped as `.tiers .tier` (0,2,0) to outrank it —
+     these are card titles, not field labels. */
+  .tiers .tier{border:1px solid var(--line);border-radius:var(--r-card);padding:16px 14px;
+    cursor:pointer;text-align:center;background:var(--cream);display:block;
+    text-transform:none;letter-spacing:normal;font-family:var(--font-body);
+    margin-bottom:0;
+    transition:border-color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease)}
+  .tiers .tier:hover{border-color:var(--blue)}
+  .tier input{position:absolute;opacity:0;width:0;height:0}
+  .tier-name{display:block;font-family:var(--font-display);font-size:16px;font-weight:600;
+    color:var(--ink);letter-spacing:-.02em;margin-bottom:3px}
+  .tier-sub{display:block;font-size:12px;color:var(--muted)}
+  .tiers .tier:has(input:checked){background:var(--white);border-color:var(--blue);
+    box-shadow:inset 0 0 0 1px var(--blue)}
+  .tiers .tier:has(input:focus-visible){outline:2px solid var(--blue);outline-offset:3px}
+  .tiers .tier:has(input:checked) .tier-sub{color:var(--blue)}
+
+  .result{position:sticky;top:96px;background:var(--blue-deep);color:var(--white);
+    border-radius:var(--r-card);padding:clamp(24px,3vw,32px)}
+  .result h2{color:var(--white);font-size:19px;margin-bottom:20px}
+  .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    padding-block:12px;border-bottom:1px solid rgba(255,255,255,.16);font-size:14px}
+  .res-row span{color:#D7E4F5}
+  .res-row b{color:var(--white);font-weight:600;font-variant-numeric:tabular-nums}
+  .res-total{padding-top:22px}
+  .res-total .mono{color:var(--blue-pale);display:block;margin-bottom:6px}
+  .res-total .big{font-family:var(--font-display);font-size:clamp(34px,4.4vw,46px);
+    font-weight:800;letter-spacing:-.035em;color:var(--white);line-height:1;
+    font-variant-numeric:tabular-nums;display:block}
+  .res-note{font-size:12.5px;color:#C3D6EE;margin-top:14px;line-height:1.6}
+  .result .btn{margin-top:22px}
+
+  @media (max-width:960px){
+    .est-grid{grid-template-columns:1fr}
+    .result{position:static}
+  }
+  @media (max-width:560px){ .tiers{grid-template-columns:1fr} }
+</style>
 </head>
-<body class="font-sans text-midnight antialiased">
+<body>
 
-<!-- NAVIGATION -->
-<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
-    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
-        <a href="index.html" class="flex items-center gap-3 select-none group">
-            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
-                <span class="material-symbols-outlined text-white text-xl">terminal</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
-                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
-            </div>
-        </a>
-        <div class="hidden md:flex items-center gap-8">
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="index.html">Home</a>
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="portfolio.html">Portfolio</a>
-            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="estimator.html">Estimator</a>
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="contact.html">Consultation</a>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="index.html" aria-label="We Can Build That — home">
+      <img src="brand/wordmark-blue.png" alt="We Can Build That">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="portfolio.html">Work</a>
+      <a href="shop.html">Gear</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-primary btn-sm" href="estimator.html" aria-current="page">Get an estimate</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="wrap"><nav class="menu" id="menu" aria-label="Mobile">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#process">Process</a>
+    <a href="portfolio.html">Work</a>
+    <a href="shop.html">Gear</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn btn-primary" href="estimator.html" aria-current="page">Get an estimate</a>
+  </nav></div>
+</header>
+
+<main id="main">
+
+  <section class="phead wrap rv">
+    <p class="mono">Cost estimator</p>
+    <h1>A number, <em>before</em> you talk to anyone.</h1>
+    <p>Most firms make you sit through a call to hear a price. Move the controls and
+      you'll get a defensible ballpark in about fifteen seconds. It's a starting point
+      for a conversation, not a quote.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="est-grid">
+
+      <div class="panel est-form rv">
+        <h2>Your project</h2>
+        <p class="lead">Three inputs. Everything updates live.</p>
+
+        <div class="field">
+          <label for="build-type">Project type</label>
+          <select class="select" id="build-type">
+            <option value="website-standard">Business website</option>
+            <option value="website-custom">Custom web application</option>
+            <option value="printing-3d">3D printing &amp; prototyping</option>
+            <option value="network-small">Network install — small office</option>
+            <option value="network-enterprise">Network install — enterprise</option>
+          </select>
         </div>
-        <div class="flex items-center gap-4">
-            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 active:scale-95 shadow-md shadow-accent/20">Get Estimate</a>
-            <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
-                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
-                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
-                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
-            </button>
+
+        <div class="field">
+          <div class="slider-head">
+            <label for="qty-slider" id="slider-label" style="margin:0">Number of pages / views</label>
+            <span class="slider-val" id="qty-val" aria-hidden="true">10</span>
+          </div>
+          <input type="range" id="qty-slider" min="1" max="50" step="1" value="10"
+                 aria-describedby="qty-help">
+          <div class="slider-ends"><span>1</span><span>50</span></div>
+          <p class="sr-only" id="qty-help">Adjust to change the quantity used in the estimate.</p>
         </div>
+
+        <div class="field" style="margin-bottom:0">
+          <label id="tier-label">Service tier</label>
+          <div class="tiers" role="radiogroup" aria-labelledby="tier-label">
+            <label class="tier">
+              <input type="radio" name="tier" value="standard" checked>
+              <span class="tier-name">Starter</span>
+              <span class="tier-sub">Included</span>
+            </label>
+            <label class="tier">
+              <input type="radio" name="tier" value="premium">
+              <span class="tier-name">Professional</span>
+              <span class="tier-sub">+25%</span>
+            </label>
+            <label class="tier">
+              <input type="radio" name="tier" value="bespoke">
+              <span class="tier-name">Enterprise</span>
+              <span class="tier-sub">+50%</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <aside class="result rv rv-2">
+        <h2>Estimated budget</h2>
+        <div class="res-row"><span>Base project cost</span><b id="base-cost">$3,500</b></div>
+        <div class="res-row"><span>Tier upgrade</span><b id="upgrade-cost">$0</b></div>
+        <div class="res-row"><span>Discovery &amp; strategy</span><b id="eng-cost">$350</b></div>
+        <div class="res-total">
+          <span class="mono">Total estimate</span>
+          <span class="big" id="total-val" aria-live="polite">$3,850</span>
+          <p class="res-note">A ballpark, not a quote. Final pricing is set after a free
+            discovery call and proper scoping — and it's fixed in writing before work
+            starts, so it won't drift upward mid-project.</p>
+        </div>
+        <a class="btn btn-onblue btn-block" href="contact.html">Start your project</a>
+      </aside>
+
     </div>
-</nav>
+  </section>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
-    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl shadow-lg" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
-</div>
-
-<main class="pt-32 pb-24">
-    <!-- Header -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-12">
-        <div class="max-w-3xl">
-            <span class="section-tag">PROJECT BUDGET GUIDE</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-midnight mb-6">Project Cost Estimator</h1>
-            <p class="text-text-muted text-base md:text-lg leading-relaxed">
-                Get an instant ballpark for your web development, design, or network infrastructure project. Adjust the inputs to match your needs.
-            </p>
-        </div>
-    </section>
-
-    <!-- Estimator Grid -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <!-- Left Side: Controls -->
-            <div class="lg:col-span-7 bg-white p-8 rounded-2xl border border-border-light shadow-sm space-y-8">
-                <h2 class="font-serif text-2xl text-midnight pb-4 border-b border-border-light">Project Customizations</h2>
-                
-                <!-- Project Type -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Project Type</label>
-                    <select class="w-full bg-offwhite border border-border-light rounded-lg px-4 py-3 text-midnight font-medium focus:ring-accent focus:border-accent form-focus" id="build-type" onchange="calculateEstimate()">
-                        <option value="website-standard">Business Website ($3,500 base)</option>
-                        <option value="website-custom">Custom Web Application ($8,000 base)</option>
-                        <option value="printing-3d">3D Printing & Prototyping ($1,200 base)</option>
-                        <option value="network-small">Network Install — Small Office ($2,500 base)</option>
-                        <option value="network-enterprise">Network Install — Enterprise ($7,500 base)</option>
-                    </select>
-                </div>
- 
-                <!-- Range Slider: Sq Ft -->
-                <div>
-                    <div class="flex justify-between items-center mb-3">
-                        <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold" id="slider-label">Number of Pages / Views</label>
-                        <span class="text-accent font-bold font-serif text-lg" id="sqft-val">10</span>
-                    </div>
-                    <input class="w-full accent-accent bg-border-light rounded-lg h-2" id="sqft-slider" max="50" min="1" oninput="calculateEstimate()" step="1" type="range" value="10"/>
-                    <div class="flex justify-between text-xs text-text-muted mt-2">
-                        <span>1</span>
-                        <span>50</span>
-                    </div>
-                </div>
- 
-                <!-- Finishes Selection -->
-                <div>
-                    <label class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-3">Service Tier</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all active-tier">
-                            <input checked class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="standard"/>
-                            <span class="material-symbols-outlined text-accent text-3xl mb-2">rocket_launch</span>
-                            <span class="text-sm font-semibold text-midnight">Starter</span>
-                            <span class="text-xs text-text-muted mt-1">Included</span>
-                        </label>
-                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all">
-                            <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="premium"/>
-                            <span class="material-symbols-outlined text-accent text-3xl mb-2">hotel_class</span>
-                            <span class="text-sm font-semibold text-midnight">Professional</span>
-                            <span class="text-xs text-text-muted mt-1">+25% — Advanced</span>
-                        </label>
-                        <label class="tier-card bg-offwhite border border-border-light hover:border-accent/45 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer text-center select-none transition-all">
-                            <input class="hidden" name="finishes" onchange="calculateEstimate()" type="radio" value="bespoke"/>
-                            <span class="material-symbols-outlined text-accent text-3xl mb-2">diamond</span>
-                            <span class="text-sm font-semibold text-midnight">Enterprise</span>
-                            <span class="text-xs text-text-muted mt-1">+50% — Custom</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Display -->
-            <div class="lg:col-span-5 sticky top-28">
-                <div class="bg-gradient-to-br from-midnight-deep to-midnight p-8 rounded-2xl border border-white/10 shadow-2xl relative overflow-hidden group">
-                    <div class="absolute -right-16 -top-16 w-36 h-36 bg-accent/10 rounded-full blur-2xl"></div>
-                    
-                    <h3 class="font-serif text-2xl text-white mb-6">Estimated Valuation</h3>
-                    
-                    <div class="space-y-6 pb-6 border-b border-white/10">
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-400">Base Project Cost:</span>
-                            <span class="text-white font-medium" id="base-cost">$3,500</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-400">Tier Upgrade:</span>
-                            <span class="text-white font-medium" id="upgrade-cost">$0</span>
-                        </div>
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-400">Discovery & Strategy:</span>
-                            <span class="text-white font-medium" id="eng-cost">$350</span>
-                        </div>
-                    </div>
- 
-                    <div class="pt-6 pb-8">
-                        <span class="text-xs uppercase tracking-wider text-gray-400 font-bold block mb-1">TOTAL ESTIMATED BUDGET</span>
-                        <span class="text-4xl md:text-5xl font-serif text-blue-400 font-bold tracking-tight" id="total-val">$1,323,000</span>
-                        <p class="text-xs text-gray-400 mt-3 leading-relaxed">
-                            *This is a ballpark estimate. Final pricing is determined after a free discovery call and detailed scoping session.
-                        </p>
-                    </div>
- 
-                    <a href="contact.html" class="w-full bg-accent text-white text-center py-4 rounded-lg font-semibold hover:bg-accent-dark transition-all duration-300 active:scale-95 block shadow-lg shadow-accent/20">
-                        Start Your Project
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 
-<!-- Footer -->
-<footer class="bg-midnight border-t border-white/10 mt-16">
-    <div class="max-w-[1280px] mx-auto py-16 px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
-        <div class="max-w-sm">
-            <div class="flex items-center gap-3 mb-4">
-                <span class="material-symbols-outlined text-accent text-3xl">terminal</span>
-                <span class="text-xl font-bold font-serif text-white tracking-wider">WeCanBuildThat</span>
-            </div>
-            <p class="text-text-muted text-sm leading-relaxed mb-6">
-                Premium web design & development, 3D printing & prototyping, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.
-            </p>
-            <p class="text-xs text-accent">© 2026 WeCanBuildThat. All Rights Reserved.</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
-            <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=web-dev">Web Design & Dev</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=3d-printing">3D Printing</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
-                <ul class="space-y-2.5 text-sm text-text-muted">
-                    <li><a class="hover:text-accent transition-colors" href="portfolio.html">Our Work</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="hover:text-accent transition-colors" href="estimator.html">Cost Estimator</a></li>
-                </ul>
-            </div>
-            <div class="col-span-2 sm:col-span-1">
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">HQ Address</h4>
-                <p class="text-sm text-text-muted leading-relaxed">
-                    100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624
-                </p>
-            </div>
-        </div>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="brand/wordmark-blue.png" alt="We Can Build That">
+        <p>Technology for real people. A BlackMountain Development Company, Northern California.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Web development</a></li>
+          <li><a href="index.html#services">3D printing</a></li>
+          <li><a href="index.html#services">Network infrastructure</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#process">Process</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Start</h4>
+        <ul>
+          <li><a href="shop.html">Gear we recommend</a></li>
+          <li><a href="estimator.html">Cost estimator</a></li>
+          <li><a href="contact.html">Book a consultation</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="foot-base">
+      <span>© <span id="yr">2026</span> We Can Build That. All rights reserved.</span>
+      <span>Sacramento · Elk Grove · Folsom</span>
+    </div>
+  </div>
 </footer>
 
+<script src="site.js"></script>
 <script>
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
-    if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', () => {
-            mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open'));
-        });
-    }
+/* ═══════════════════════════════════════════════════════════════════════════
+   Pricing model — carried over unchanged from the original estimator so the
+   numbers this page quotes stay identical to what the business already used.
 
-    function updateTierSelection() {
-        document.querySelectorAll('.tier-card').forEach(card => {
-            const input = card.querySelector('input');
-            if (input.checked) {
-                card.classList.add('active-tier');
-            } else {
-                card.classList.remove('active-tier');
-            }
-        });
-    }
+     baseCost  = BASE_RATES[type] + (qty - 1) * PER_UNIT[type]
+     upgrade   = baseCost * TIER_MODIFIER
+     strategy  = (baseCost + upgrade) * 0.10
+     total     = baseCost + upgrade + strategy
 
-    function calculateEstimate() {
-        const buildType = document.getElementById('build-type').value;
-        const qty = parseInt(document.getElementById('sqft-slider').value);
-        document.getElementById('sqft-val').innerText = qty;
+   To change pricing, edit the three tables below — nothing else depends on them.
+   ═══════════════════════════════════════════════════════════════════════════ */
+(function(){
+  'use strict';
 
-        const labelEl = document.getElementById('slider-label');
-        if (buildType === 'printing-3d') {
-            labelEl.innerText = 'Number of Parts / Prototypes';
-        } else if (buildType.startsWith('network')) {
-            labelEl.innerText = 'Number of Network Drops';
-        } else {
-            labelEl.innerText = 'Number of Pages / Views';
-        }
+  var BASE_RATES = {
+    'website-standard':   3500,
+    'website-custom':     8000,
+    'printing-3d':        1200,
+    'network-small':      2500,
+    'network-enterprise': 7500
+  };
+  var PER_UNIT_DEFAULT = 200;
+  var PER_UNIT = { 'printing-3d': 80 };
+  var TIER_MODIFIER = { standard: 0, premium: 0.25, bespoke: 0.50 };
+  var STRATEGY_RATE = 0.10;
 
-        updateTierSelection();
+  var SLIDER_LABEL = {
+    'printing-3d':        'Number of parts / prototypes',
+    'network-small':      'Number of network drops',
+    'network-enterprise': 'Number of network drops'
+  };
+  var SLIDER_LABEL_DEFAULT = 'Number of pages / views';
 
-        // Base rates by project type
-        const baseRates = {
-            'website-standard': 3500,
-            'website-custom': 8000,
-            'printing-3d': 1200,
-            'network-small': 2500,
-            'network-enterprise': 7500
-        };
-        let baseCost = (baseRates[buildType] || 3500) + (qty - 1) * (buildType === 'printing-3d' ? 80 : 200);
+  var typeEl  = document.getElementById('build-type');
+  var qtyEl   = document.getElementById('qty-slider');
+  var qtyVal  = document.getElementById('qty-val');
+  var labelEl = document.getElementById('slider-label');
 
-        const finishOption = document.querySelector('input[name="finishes"]:checked').value;
-        let finishModifier = 0.0;
-        if (finishOption === 'premium') finishModifier = 0.25;
-        if (finishOption === 'bespoke') finishModifier = 0.50;
+  var money = function(n){ return '$' + Math.round(n).toLocaleString('en-US'); };
 
-        const upgradeCost = baseCost * finishModifier;
-        const strategyCost = (baseCost + upgradeCost) * 0.10;
-        const totalCost = baseCost + upgradeCost + strategyCost;
+  function calculate(){
+    var type = typeEl.value;
+    var qty  = parseInt(qtyEl.value, 10) || 1;
 
-        document.getElementById('base-cost').innerText = '$' + Math.round(baseCost).toLocaleString();
-        document.getElementById('upgrade-cost').innerText = '$' + Math.round(upgradeCost).toLocaleString();
-        document.getElementById('eng-cost').innerText = '$' + Math.round(strategyCost).toLocaleString();
-        document.getElementById('total-val').innerText = '$' + Math.round(totalCost).toLocaleString();
-    }
+    qtyVal.textContent = qty;
+    labelEl.textContent = SLIDER_LABEL[type] || SLIDER_LABEL_DEFAULT;
 
-    // Initialize values on load
-    window.addEventListener('DOMContentLoaded', () => {
-        calculateEstimate();
-    });
+    var perUnit  = PER_UNIT[type] || PER_UNIT_DEFAULT;
+    var baseCost = (BASE_RATES[type] || BASE_RATES['website-standard']) + (qty - 1) * perUnit;
+
+    var checked  = document.querySelector('input[name="tier"]:checked');
+    var upgrade  = baseCost * (TIER_MODIFIER[checked ? checked.value : 'standard'] || 0);
+    var strategy = (baseCost + upgrade) * STRATEGY_RATE;
+
+    document.getElementById('base-cost').textContent    = money(baseCost);
+    document.getElementById('upgrade-cost').textContent = money(upgrade);
+    document.getElementById('eng-cost').textContent     = money(strategy);
+    document.getElementById('total-val').textContent    = money(baseCost + upgrade + strategy);
+  }
+
+  typeEl.addEventListener('change', calculate);
+  qtyEl.addEventListener('input', calculate);
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="tier"]'), function(el){
+    el.addEventListener('change', calculate);
+  });
+
+  calculate();
+})();
 </script>
 
 </body>

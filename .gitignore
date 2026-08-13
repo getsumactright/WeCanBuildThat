@@ -1,0 +1,23 @@
+# ── Internal business documents ────────────────────────────────────────────
+# This repository is public. Documents/ holds pricing sheets, proposal
+# templates, and contract templates — these must never be committed. Anything
+# pushed here is permanently retrievable from git history even after deletion.
+Documents/
+*.docx
+*.pdf
+
+# ── Working files ──────────────────────────────────────────────────────────
+# Design-direction comparisons used while choosing the visual system. Useful
+# locally as reference; not part of the shipped site.
+directions.html
+directions-v2.html
+
+# ── OS / editor cruft ──────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/

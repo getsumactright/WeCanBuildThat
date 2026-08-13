@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gear we recommend — We Can Build That</title>
+<meta name="description" content="Hardware and tools we actually use and recommend to clients. Affiliate links support the shop at no extra cost to you.">
+<meta property="og:title" content="Gear we recommend — We Can Build That">
+<meta property="og:description" content="Hardware and tools we actually use and recommend to clients.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Outfit:wght@900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .head{padding-block:clamp(36px,5vw,60px) 28px}
+  .head-grid{display:grid;grid-template-columns:1fr 340px;gap:clamp(28px,5vw,64px);align-items:end}
+  .head h1{margin:14px 0 16px;max-width:15ch}
+  .head h1 em{font-style:normal;font-weight:400;color:var(--blue)}
+  .head p{font-size:16.5px;max-width:52ch}
+
+  /* Disclosure is a legal requirement (FTC 16 CFR 255 + the Amazon Associates
+     Operating Agreement), not a design choice. It must be visible without
+     scrolling past the first affiliate link — do not move it below the grid,
+     collapse it, or drop it to fine print. */
+  .disclosure{background:var(--white);border:1px solid var(--line);
+    border-left:3px solid var(--azure);border-radius:0 var(--r-card) var(--r-card) 0;
+    padding:18px 22px}
+  .disclosure p{font-size:13.5px;color:var(--body);margin:0}
+  .disclosure b{color:var(--ink);font-weight:600}
+
+  .filters{border-top:1px solid var(--line);margin-top:32px;padding-block:20px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .filter{font-family:var(--font-body);font-size:13.5px;font-weight:500;color:var(--body);
+    background:transparent;border:1px solid var(--line);border-radius:999px;
+    padding:13px 18px;cursor:pointer;
+    transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),
+      background var(--dur-fast) var(--ease)}
+  .filter:hover{border-color:var(--blue);color:var(--blue)}
+  .filter[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--white)}
+  .count{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted)}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:clamp(48px,6vw,80px)}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);
+    box-shadow:var(--shadow-card);display:flex;flex-direction:column;overflow:hidden;
+    transition:border-color var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
+  .card:hover{border-color:var(--azure);transform:translateY(-2px)}
+  .card-media{aspect-ratio:4/3;background:var(--cream);border-bottom:1px solid var(--line-soft);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+  .card-media img{width:100%;height:100%;object-fit:contain;padding:16px;
+    transition:transform var(--dur-slow) var(--ease)}
+  .card:hover .card-media img{transform:scale(1.03)}
+  .card-media .ph{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);text-align:center;padding:12px}
+  .pick{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:10.5px;
+    letter-spacing:.09em;text-transform:uppercase;background:var(--blue);color:var(--white);
+    padding:5px 9px;border-radius:var(--r-sm)}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .card-cat{font-family:var(--font-mono);font-size:11px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+  .card h3{margin-bottom:6px;font-size:16.5px}
+  .card-note{font-size:13px;color:var(--body);margin-bottom:14px;flex:1}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding-top:13px;border-top:1px solid var(--line-soft)}
+  .price{font-family:var(--font-display);font-size:17px;font-weight:800;color:var(--ink);
+    letter-spacing:-.02em}
+  .price small{font-family:var(--font-body);font-size:11px;font-weight:400;color:var(--muted);
+    letter-spacing:0;display:block;margin-top:1px}
+  .buy{font-size:13px;font-weight:600;color:var(--white);background:var(--blue);
+    padding:13px 17px;border-radius:var(--r-btn);white-space:nowrap;
+    transition:background var(--dur-fast) var(--ease)}
+  .card:hover .buy{background:var(--blue-deep)}
+  .empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);font-size:15px}
+
+  .band-grid{display:grid;grid-template-columns:1fr 320px;gap:clamp(28px,5vw,64px);align-items:start}
+
+  @media (max-width:1080px){ .grid{grid-template-columns:repeat(3,1fr)} }
+  @media (max-width:960px){
+    .head-grid,.band-grid{grid-template-columns:1fr}
+    .grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:720px){ .count{margin-left:0;width:100%} }
+  @media (max-width:520px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="index.html" aria-label="We Can Build That — home">
+      <img src="brand/wordmark-blue.png" alt="We Can Build That">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#work">Work</a>
+      <a href="shop.html" aria-current="page">Gear</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-primary btn-sm" href="estimator.html">Get an estimate</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="wrap"><nav class="menu" id="menu" aria-label="Mobile">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#process">Process</a>
+    <a href="index.html#work">Work</a>
+    <a href="shop.html" aria-current="page">Gear</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn btn-primary" href="estimator.html">Get an estimate</a>
+  </nav></div>
+</header>
+
+<main id="main">
+
+  <section class="head wrap">
+    <div class="head-grid">
+      <div class="rv">
+        <p class="mono">Gear &amp; recommendations</p>
+        <h1>The kit we'd tell <em>you</em> to buy.</h1>
+        <p>Hardware we've used on real jobs or specified for clients. If something on this
+          list is wrong for your situation, we'll say so — that's usually the more useful
+          answer.</p>
+      </div>
+      <div class="disclosure rv">
+        <p><b>Disclosure:</b> We Can Build That is a participant in the Amazon Services LLC
+          Associates Program. As an Amazon Associate we earn from qualifying purchases.
+          Links on this page are affiliate links — if you buy through one, we may earn a
+          commission at no additional cost to you.</p>
+      </div>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter products by category">
+      <button class="filter" data-cat="all" aria-pressed="true">All</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="band">
+    <div class="wrap band-grid">
+      <div class="rv">
+        <span class="mono">Why there's a shop here</span>
+        <h2>We get asked what to buy. Often.</h2>
+        <p>Clients ask which router, which NAS, which filament. Rather than repeat the
+          answer over email, it lives here. The recommendation is the same whether you buy
+          through our link or not — the link just means Amazon pays us a small referral
+          fee instead of nobody.</p>
+      </div>
+      <ul class="rv">
+        <li><b>No pay-for-placement.</b> Nothing appears here because a brand asked.</li>
+        <li><b>Prices are indicative.</b> Amazon's price at checkout is the real one.</li>
+        <li><b>Ask before you buy.</b> Happy to tell you if it's wrong for your setup.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="brand/wordmark-blue.png" alt="We Can Build That">
+        <p>Technology for real people. A BlackMountain Development Company, Northern California.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Web development</a></li>
+          <li><a href="index.html#services">3D printing</a></li>
+          <li><a href="index.html#services">Network infrastructure</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#process">Process</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Start</h4>
+        <ul>
+          <li><a href="shop.html">Gear we recommend</a></li>
+          <li><a href="estimator.html">Cost estimator</a></li>
+          <li><a href="contact.html">Book a consultation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span class="fine">As an Amazon Associate, We Can Build That earns from qualifying
+        purchases. © <span id="yr">2026</span> We Can Build That. All rights reserved.</span>
+      <span>Sacramento · Elk Grove · Folsom</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   ▼▼▼  EDIT YOUR PRODUCTS HERE  ▼▼▼
+   ───────────────────────────────────────────────────────────────────────────
+   To add a product: copy one { ... } block, paste it, change the values.
+   Keep the comma between blocks. Order here is the order on the page.
+
+     title    Product name as you want it displayed.
+     cat      Category. Any new value automatically becomes a filter button.
+     price    Shown as a guide only. Amazon's checkout price is authoritative.
+     note     One or two sentences on why you recommend it. Your voice, not
+              copy-pasted marketing text — that's the whole value of the page.
+     url      Your Amazon affiliate link (the one containing your tag=xxxx-20).
+     img      Filename inside images/products/ (e.g. "wifi-router.jpg"), OR a
+              full https:// URL, OR "" to show the placeholder.
+     asin     Amazon's 10-character product ID, from the /dp/XXXXXXXXXX part of
+              the URL. Optional today — used later by the Creators API.
+     pick     true adds a "Top pick" badge. Use it sparingly or it means nothing.
+
+   ⚠ IMAGES — read this before adding any:
+   You may NOT scrape or hot-link images from Amazon product pages. SiteStripe
+   image links were discontinued 31 Dec 2023, and PA-API v5 retired 15 May 2026.
+   The only sanctioned source now is the Creators API, which requires 10
+   qualifying sales in the trailing 30 days plus a server-side OAuth proxy —
+   see IMAGES.md for the migration path when you qualify.
+
+   Until then use your own photographs (best option — real photos of gear you
+   actually own suit this page better than catalog renders) or manufacturer
+   press images you have permission to use. Drop the file into
+   images/products/ and put the filename in the img field.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+var PRODUCTS = [
+  {
+    title: "Wi-Fi 6E mesh router system",
+    cat:   "Networking",
+    price: "$299",
+    note:  "What we put in most home offices that outgrew the ISP box. Handles a heavy video-call household without hand-off drops.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  true
+  },
+  {
+    title: "4-bay network attached storage",
+    cat:   "Networking",
+    price: "$479",
+    note:  "The backup answer for a small office that keeps everything on one laptop. Set it up once, stop worrying.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+  {
+    title: "Cat6A shielded patch cables (10-pack)",
+    cat:   "Networking",
+    price: "$34",
+    note:  "Boring, and that's the point. Correct spec for anything you'd actually want to run at 10G later.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+  {
+    title: "PLA+ filament, 1kg spool",
+    cat:   "3D printing",
+    price: "$26",
+    note:  "Our default for prototype parts. More forgiving than standard PLA and it doesn't get brittle sitting on a shelf.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  true
+  },
+  {
+    title: "Filament dry box",
+    cat:   "3D printing",
+    price: "$59",
+    note:  "If your prints started stringing for no obvious reason, it's moisture. This fixes it and pays for itself in wasted spools.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+  {
+    title: "27\" 4K USB-C monitor",
+    cat:   "Office",
+    price: "$399",
+    note:  "One cable for video, data, and laptop charging. The desk-clutter difference is bigger than the spec sheet suggests.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+  {
+    title: "Line-interactive UPS, 1500VA",
+    cat:   "Office",
+    price: "$189",
+    note:  "Cheap insurance for anything with a spinning disk or a router you'd rather not power-cycle during a brownout.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+  {
+    title: "Cable tester and toner kit",
+    cat:   "Tools",
+    price: "$74",
+    note:  "If you're terminating your own keystones, get this before you get frustrated. Finds the one bad crimp in a wall of them.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  },
+
+  /* ── Misc ──────────────────────────────────────────────────────────────
+     Catch-all for products that don't fit the categories above. Placeholder
+     so the "Misc" filter button appears — replace the title, price, note,
+     and url with a real product, then copy this block for each additional
+     item. Delete it if you don't need the category. */
+  {
+    title: "First miscellaneous product",
+    cat:   "Misc",
+    price: "$0",
+    note:  "Placeholder entry. Replace this with a real product and your own recommendation, or delete the block to remove the Misc category.",
+    url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
+    img:   "",
+    asin:  "",
+    pick:  false
+  }
+];
+
+/* ▲▲▲  END OF PRODUCT LIST — no need to edit below this line  ▲▲▲ */
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMAGE SOURCE CONFIG
+   ───────────────────────────────────────────────────────────────────────────
+   Today every image comes from LOCAL_DIR. When you qualify for the Amazon
+   Creators API (10 qualifying sales in the trailing 30 days) and stand up the
+   proxy described in IMAGES.md, flip USE_API to true and set API_PROXY.
+
+   Resolution order is: explicit img field → API by ASIN → placeholder. An
+   explicit img always wins, so you can override the API per-product with your
+   own photo without touching any logic.
+   ═══════════════════════════════════════════════════════════════════════════ */
+var IMAGE_SOURCE = {
+  LOCAL_DIR: 'images/products/',
+  USE_API:   false,
+  API_PROXY: '/api/amazon-image'   /* your serverless endpoint; ?asin=XXXXXXXXXX */
+};
+
+(function(){
+  var grid    = document.getElementById('grid');
+  var filters = document.querySelector('.filters');
+  var countEl = document.getElementById('count');
+  var active  = 'all';
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  /* Build one filter button per distinct category, in first-seen order. */
+  function buildFilters(){
+    var seen = [];
+    PRODUCTS.forEach(function(p){
+      if (p.cat && seen.indexOf(p.cat) === -1) seen.push(p.cat);
+    });
+    seen.forEach(function(cat){
+      var b = document.createElement('button');
+      b.className = 'filter';
+      b.type = 'button';
+      b.dataset.cat = cat;
+      b.setAttribute('aria-pressed','false');
+      b.textContent = cat;
+      filters.insertBefore(b, countEl);
+    });
+  }
+
+  /* Returns an image URL for a product, or "" if there isn't one yet.
+     A bare filename is treated as living in LOCAL_DIR; anything with a
+     protocol or leading slash is used verbatim. */
+  function resolveImage(p){
+    if (p.img){
+      return /^(https?:)?\/\//.test(p.img) || p.img.charAt(0) === '/'
+        ? p.img
+        : IMAGE_SOURCE.LOCAL_DIR + p.img;
+    }
+    if (IMAGE_SOURCE.USE_API && p.asin){
+      return IMAGE_SOURCE.API_PROXY + '?asin=' + encodeURIComponent(p.asin);
+    }
+    return '';
+  }
+
+  function cardHTML(p){
+    var src = resolveImage(p);
+    /* onerror guards against a typo'd filename or a proxy hiccup — the card
+       falls back to the placeholder instead of showing a broken-image icon. */
+    var media = src
+      ? '<img src="' + esc(src) + '" alt="' + esc(p.title) + '" loading="lazy" ' +
+        'onerror="this.parentNode.innerHTML=\'<span class=&quot;ph&quot;>Image<br>coming soon</span>\'">'
+      : '<span class="ph">Image<br>coming soon</span>';
+    var badge = p.pick ? '<span class="pick">Top pick</span>' : '';
+    return '' +
+      '<article class="card" data-cat="' + esc(p.cat) + '">' +
+        '<div class="card-media">' + badge + media + '</div>' +
+        '<div class="card-body">' +
+          '<span class="card-cat">' + esc(p.cat) + '</span>' +
+          '<h3>' + esc(p.title) + '</h3>' +
+          '<p class="card-note">' + esc(p.note) + '</p>' +
+          '<div class="card-foot">' +
+            '<span class="price">' + esc(p.price) + '<small>approx.</small></span>' +
+            '<a class="buy" href="' + esc(p.url) + '" target="_blank" ' +
+               'rel="nofollow sponsored noopener noreferrer">' +
+               'View on Amazon<span class="sr-only"> (opens in a new tab)</span></a>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function render(){
+    var list = (active === 'all')
+      ? PRODUCTS
+      : PRODUCTS.filter(function(p){ return p.cat === active; });
+
+    grid.innerHTML = list.length
+      ? list.map(cardHTML).join('')
+      : '<p class="empty">Nothing in this category yet.</p>';
+
+    countEl.textContent = list.length + (list.length === 1 ? ' item' : ' items');
+  }
+
+  filters.addEventListener('click', function(e){
+    var btn = e.target.closest('.filter');
+    if (!btn) return;
+    active = btn.dataset.cat;
+    filters.querySelectorAll('.filter').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    render();
+  });
+
+  buildFilters();
+  render();
+
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,341 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Portfolio | WeCanBuildThat — Web Development, Design & Network Infrastructure Projects</title>
-    <meta name="description" content="Browse WeCanBuildThat's portfolio of web development, web design, and network infrastructure projects across Northern California."/>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        midnight: "#111827",
-                        "midnight-deep": "#0f172a",
-                        offwhite: "#fafafa",
-                        apple: "#f5f5f7",
-                        accent: "#2563eb",
-                        "accent-dark": "#1d4ed8",
-                        "accent-light": "#eff6ff",
-                        "border-light": "#e5e7eb",
-                        "text-body": "#374151",
-                        "text-muted": "#6b7280",
-                    },
-                    fontFamily: {
-                        serif: ["Newsreader", "serif"],
-                        sans: ["Plus Jakarta Sans", "sans-serif"]
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-        body { background-color: #fafafa; -webkit-font-smoothing: antialiased; }
-        .nav-link { position: relative; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #2563eb; transition: width 0.3s ease; border-radius: 2px; }
-        .nav-link:hover::after { width: 100%; }
-        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        #mobile-menu.open { transform: translateX(0); }
-        #ham-top, #ham-mid, #ham-bot { transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-        body.menu-open #ham-top { transform: rotate(45deg) translate(5px, 5px); }
-        body.menu-open #ham-mid { opacity: 0; transform: scaleX(0); }
-        body.menu-open #ham-bot { transform: rotate(-45deg) translate(5px, -5px); }
-        .filter-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; }
-        .project-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(37,99,235,0.1); }
-        #lightbox { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-        }
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
-        .delay-400 { transition-delay: 0.4s; }
-        .section-tag { display: inline-block; background: #eff6ff; color: #2563eb; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
-        /* Flex (not grid) so filtered results with 1-2 cards center instead of
-           hugging the left edge with a lopsided gap on the right */
-        #portfolio-grid .project-card { width: 100%; }
-        @media (min-width: 768px) { #portfolio-grid .project-card { width: calc(50% - 1rem); } }
-        @media (min-width: 1024px) { #portfolio-grid .project-card { width: calc(33.333% - 1.334rem); } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — We Can Build That</title>
+<meta name="description" content="Web development, 3D printing, and network infrastructure projects across Northern California.">
+<meta property="og:title" content="Work — We Can Build That">
+<meta property="og:description" content="Web development, 3D printing, and network infrastructure projects across Northern California.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Outfit:wght@900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .filters{border-top:1px solid var(--line);padding-block:20px;display:flex;
+    align-items:center;gap:10px;flex-wrap:wrap}
+  .filter{font-family:var(--font-body);font-size:13.5px;font-weight:500;color:var(--body);
+    background:transparent;border:1px solid var(--line);border-radius:999px;
+    padding:13px 18px;cursor:pointer;
+    transition:border-color var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),
+      background var(--dur-fast) var(--ease)}
+  .filter:hover{border-color:var(--blue);color:var(--blue)}
+  .filter[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--white)}
+  .count{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted)}
+
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    padding-bottom:clamp(48px,6vw,80px)}
+  .proj{background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);
+    box-shadow:var(--shadow-card);overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color var(--dur-fast) var(--ease),transform var(--dur-fast) var(--ease)}
+  .proj:hover{border-color:var(--azure);transform:translateY(-2px)}
+  .proj-media{aspect-ratio:16/10;background:var(--cream);
+    border-bottom:1px solid var(--line-soft);display:flex;align-items:center;
+    justify-content:center;overflow:hidden}
+  .proj-media img{width:100%;height:100%;object-fit:cover}
+  .proj-media .ph{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);text-align:center;padding:14px;line-height:1.7}
+  .proj-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+  .proj-tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .proj h3{font-size:17.5px;margin-bottom:6px}
+  .proj p{font-size:13px;color:var(--body);margin-bottom:14px;flex:1}
+  .proj-meta{display:flex;flex-wrap:wrap;gap:6px;padding-top:13px;
+    border-top:1px solid var(--line-soft)}
+  .chip{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;
+    color:var(--muted);background:var(--cream);border:1px solid var(--line);
+    border-radius:var(--r-sm);padding:4px 8px}
+  .empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);font-size:15px}
+
+  .cta-panel{display:grid;grid-template-columns:1fr 340px;overflow:hidden;
+    margin-bottom:clamp(48px,6vw,80px)}
+  .cta-copy{padding:clamp(26px,3.5vw,40px)}
+  .cta-copy h2{margin-bottom:12px;max-width:16ch}
+  .cta-copy p{font-size:15.5px;margin-bottom:22px;max-width:44ch}
+  .cta-btns{display:flex;flex-wrap:wrap;gap:12px}
+  .cta-side{background:var(--cream);border-left:1px solid var(--line);
+    padding:clamp(26px,3.5vw,36px)}
+  .cta-side .mono{display:block;margin-bottom:14px}
+  .cta-side div{padding-block:12px;border-bottom:1px solid var(--line)}
+  .cta-side div:last-child{border-bottom:0}
+  .cta-side dt{font-size:12.5px;color:var(--muted);margin-bottom:2px}
+  .cta-side dd{margin:0;font-size:14.5px;color:var(--ink);font-weight:500}
+
+  @media (max-width:960px){
+    .work-grid{grid-template-columns:repeat(2,1fr)}
+    .cta-panel{grid-template-columns:1fr}
+    .cta-side{border-left:0;border-top:1px solid var(--line)}
+  }
+  @media (max-width:720px){ .count{margin-left:0;width:100%} }
+  @media (max-width:560px){ .work-grid{grid-template-columns:1fr} }
+</style>
 </head>
-<body class="font-sans text-midnight antialiased">
+<body>
 
-<!-- NAVIGATION -->
-<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm">
-    <div class="max-w-[1280px] mx-auto flex justify-between items-center px-6 md:px-8 h-20">
-        <a href="index.html" class="flex items-center gap-3 select-none group">
-            <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center group-hover:bg-accent-dark transition-colors duration-300">
-                <span class="material-symbols-outlined text-white text-xl">terminal</span>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-lg font-bold tracking-tight font-serif text-midnight">WeCanBuildThat</span>
-                <span class="text-[9px] uppercase tracking-[0.2em] text-accent font-semibold leading-none">A BlackMountain Company</span>
-            </div>
-        </a>
-        <div class="hidden md:flex items-center gap-8">
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="index.html">Home</a>
-            <a class="nav-link text-accent text-sm font-semibold tracking-wide" href="portfolio.html">Portfolio</a>
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="estimator.html">Estimator</a>
-            <a class="nav-link text-text-muted hover:text-midnight text-sm font-semibold tracking-wide transition-colors" href="contact.html">Consultation</a>
-        </div>
-        <div class="flex items-center gap-4">
-            <a href="estimator.html" class="hidden sm:inline-block bg-accent text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-accent-dark transition-all duration-300 shadow-md shadow-accent/20">Get Estimate</a>
-            <button id="hamburger-btn" aria-label="Toggle menu" class="md:hidden flex flex-col justify-center gap-[5px] w-8 h-8 cursor-pointer focus:outline-none p-1">
-                <span id="ham-top" class="block w-full h-[2px] bg-midnight rounded-full"></span>
-                <span id="ham-mid" class="block w-3/4 h-[2px] bg-midnight rounded-full"></span>
-                <span id="ham-bot" class="block w-full h-[2px] bg-midnight rounded-full"></span>
-            </button>
-        </div>
-    </div>
-</nav>
+<a class="skip" href="#main">Skip to content</a>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu" class="fixed inset-0 z-40 bg-white flex flex-col justify-center items-center gap-8">
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="index.html" onclick="closeMobileMenu()">Home</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="portfolio.html" onclick="closeMobileMenu()">Portfolio</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="estimator.html" onclick="closeMobileMenu()">Estimator</a>
-    <a class="font-serif text-4xl text-midnight hover:text-accent transition-colors" href="contact.html" onclick="closeMobileMenu()">Consultation</a>
-    <a class="mt-4 bg-accent text-white font-bold text-sm uppercase tracking-wider px-12 py-5 rounded-xl shadow-lg" href="estimator.html" onclick="closeMobileMenu()">Get Estimate</a>
-</div>
-
-<!-- Lightbox -->
-<div id="lightbox" class="fixed inset-0 z-[100] bg-midnight-deep/90 items-center justify-center hidden" onclick="closeLightbox()">
-    <button class="absolute top-6 right-6 text-white/70 hover:text-white" onclick="closeLightbox()">
-        <span class="material-symbols-outlined text-4xl">close</span>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="index.html" aria-label="We Can Build That — home">
+      <img src="brand/wordmark-blue.png" alt="We Can Build That">
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#process">Process</a>
+      <a href="portfolio.html" aria-current="page">Work</a>
+      <a href="shop.html">Gear</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-primary btn-sm" href="estimator.html">Get an estimate</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span><span></span>
     </button>
-    <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[85vh] object-contain rounded-2xl shadow-2xl"/>
-    <p id="lightbox-title" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white font-serif text-lg bg-midnight/80 backdrop-blur-sm px-6 py-2 rounded-full whitespace-nowrap"></p>
-</div>
+  </div>
+  <div class="wrap"><nav class="menu" id="menu" aria-label="Mobile">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#process">Process</a>
+    <a href="portfolio.html" aria-current="page">Work</a>
+    <a href="shop.html">Gear</a>
+    <a href="contact.html">Contact</a>
+    <a class="btn btn-primary" href="estimator.html">Get an estimate</a>
+  </nav></div>
+</header>
 
-<main class="pt-32 pb-24">
-    <!-- Header -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-14">
-        <div class="max-w-3xl reveal">
-            <span class="section-tag">Our Archive</span>
-            <h1 class="font-serif text-4xl md:text-5xl text-midnight mb-5">Project <em class="italic font-light text-accent">Portfolio</em></h1>
-            <p class="text-text-muted text-base md:text-lg leading-relaxed max-w-2xl">Explore our curated gallery of web development builds, UI/UX design work, and enterprise network infrastructure installations across Northern California.</p>
+<main id="main">
+
+  <section class="phead wrap rv">
+    <p class="mono">Selected work</p>
+    <h1>Projects, and <em>what they took.</em></h1>
+    <p>Case studies are being written up properly rather than padded out with stock
+      screenshots. Categories filter below — if you want detail on something specific
+      before the write-up lands, ask and we'll walk you through it.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="filters" role="group" aria-label="Filter projects by category">
+      <button class="filter" type="button" data-cat="all" aria-pressed="true">All</button>
+      <button class="filter" type="button" data-cat="web-dev" aria-pressed="false">Web development</button>
+      <button class="filter" type="button" data-cat="3d-printing" aria-pressed="false">3D printing</button>
+      <button class="filter" type="button" data-cat="network" aria-pressed="false">Network infrastructure</button>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+
+    <!-- Placeholder projects. Replace .ph with <img src="images/work/NAME.jpg" alt="…">
+         and update the title, blurb, and chips as each write-up is finished. -->
+    <div class="work-grid" id="grid">
+
+      <article class="proj rv" data-cat="web-dev">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">Web development</span>
+          <h3>Client portal and dashboard</h3>
+          <p>Full-stack web application with authenticated client access and reporting.</p>
+          <div class="proj-meta"><span class="chip">React</span><span class="chip">Node</span><span class="chip">Auth</span></div>
         </div>
-    </section>
+      </article>
 
-    <!-- Filters -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mb-12 reveal">
-        <div class="flex flex-wrap gap-3 border-b border-border-light pb-8">
-            <button class="filter-btn active px-5 py-2 rounded-lg font-semibold text-sm border border-accent/30 transition-all duration-300" onclick="filterProjects('all')" id="btn-filter-all">All Projects</button>
-            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('web-dev')" id="btn-filter-web-dev">Web Design & Dev</button>
-            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('3d-printing')" id="btn-filter-3d-printing">3D Printing</button>
-            <button class="filter-btn px-5 py-2 rounded-lg font-semibold text-sm border border-border-light hover:border-accent hover:text-accent transition-all duration-300 text-text-muted" onclick="filterProjects('network')" id="btn-filter-network">Network Infrastructure</button>
+      <article class="proj rv rv-2" data-cat="web-dev">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">Web development</span>
+          <h3>Marketing site rebuild</h3>
+          <p>Rebuilt for speed and maintainability, with the client owning every account at handover.</p>
+          <div class="proj-meta"><span class="chip">Static</span><span class="chip">SEO</span><span class="chip">CMS</span></div>
         </div>
-    </section>
+      </article>
 
-    <!-- Portfolio Grid -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8">
-        <div class="flex flex-wrap justify-center gap-8" id="portfolio-grid">
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-100" data-category="web-dev">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_dev.png','FinTech Client Portal — Sacramento, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_dev.png" alt="FinTech Client Portal"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">FinTech Client Portal</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Full-stack React + Node.js web application for a regional financial services firm — featuring real-time dashboards, secure auth, and document management.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Sacramento, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">React · Node.js</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="web-dev">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/web_design.png','Torres Remodeling Website — Elk Grove, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/web_design.png" alt="Torres Remodeling Website"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2 hover:text-accent transition-colors">
-                        <a href="https://torresremodel.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1">
-                            Torres Remodeling Website <span class="material-symbols-outlined text-base">open_in_new</span>
-                        </a>
-                    </h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Modern corporate portfolio website and lead generation platform for Torres Remodeling — built to highlight luxury renovations, before & after transformations, and custom craftsmanship.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Tailwind · HTML5</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-300" data-category="network">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png','Corporate Campus Network — Folsom, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/network_infra.png" alt="Corporate Campus Network"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Network</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">Corporate Campus Network</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Full structured cabling for a 12,000 sq ft corporate campus — Cat6A, fiber backbone, 28 Wi-Fi 6E access points, and a managed rack build-out.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Folsom, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Cat6A · Wi-Fi 6E</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-200" data-category="web-dev">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/hero_tech.png','Data Center Dashboard — Elk Grove, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/hero_tech.png" alt="Data Center Dashboard"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Design & Dev</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">Data Center Dashboard</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">Real-time infrastructure monitoring dashboard with custom alert logic, rack visualization, and automated reporting for a regional data center operator.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">Next.js · Chart.js</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-300" data-category="network">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/network_infra.png','Medical Office Network — Roseville, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/network_infra.png" alt="Medical Office Network"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">Network</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">Medical Office Network</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">HIPAA-compliant network segmentation, VoIP phone system, and secure wireless rollout for a multi-suite medical practice across two floors.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Roseville, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">HIPAA · VoIP</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card bg-white rounded-2xl border border-border-light overflow-hidden shadow-sm reveal delay-400" data-category="3d-printing">
-                <div class="h-56 overflow-hidden relative cursor-pointer" onclick="openLightbox('images/3d_printing.png','Custom Enclosure Prototyping — Elk Grove, CA')">
-                    <img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" src="images/3d_printing.png" alt="Custom Enclosure Prototyping"/>
-                    <div class="absolute inset-0 bg-midnight/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"><span class="material-symbols-outlined text-white text-4xl">zoom_in</span></div>
-                    <span class="absolute top-4 left-4 bg-accent text-white text-[10px] uppercase font-bold tracking-widest px-3 py-1 rounded-full">3D Printing</span>
-                </div>
-                <div class="p-6">
-                    <h3 class="font-serif text-xl text-midnight mb-2">Custom Enclosure Prototyping</h3>
-                    <p class="text-text-muted text-sm leading-relaxed mb-4">High-fidelity 3D modeling and rapid prototyping of an engineered ABS casing for an IoT hardware manufacturer, completed on tight tolerances.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-accent">Elk Grove, CA</span>
-                        <span class="text-xs text-text-muted bg-apple px-2 py-1 rounded">ABS · CAD modeling</span>
-                    </div>
-                </div>
-            </div>
-
+      <article class="proj rv rv-3" data-cat="3d-printing">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">3D printing</span>
+          <h3>Custom enclosure run</h3>
+          <p>CAD modeling through to a short production run of housings in engineering plastic.</p>
+          <div class="proj-meta"><span class="chip">CAD</span><span class="chip">ABS</span><span class="chip">Short run</span></div>
         </div>
-        <div class="hidden text-center py-20" id="no-results">
-            <span class="material-symbols-outlined text-5xl text-border-light mb-4 block">search_off</span>
-            <p class="text-lg font-serif text-midnight">No projects in this category yet.</p>
-        </div>
-    </section>
+      </article>
 
-    <!-- CTA -->
-    <section class="max-w-[1280px] mx-auto px-6 md:px-8 mt-20">
-        <div class="bg-midnight-deep rounded-2xl p-10 md:p-14 text-center relative overflow-hidden reveal">
-            <div class="absolute inset-0 opacity-10" style="background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:60px 60px;"></div>
-            <h2 class="font-serif text-2xl md:text-3xl text-white mb-4 relative">Ready to start your <em class="italic font-light text-blue-400">next project?</em></h2>
-            <p class="text-gray-400 text-sm md:text-base mb-8 max-w-lg mx-auto relative">Use our interactive cost estimator for an instant ballpark, or book a free consultation with our team.</p>
-            <div class="flex flex-wrap justify-center gap-4 relative">
-                <a href="estimator.html" class="bg-accent text-white font-semibold px-8 py-4 rounded-xl hover:bg-accent-dark transition-all duration-300 shadow-lg shadow-accent/25">Run Cost Estimator</a>
-                <a href="contact.html" class="border border-white/20 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-300">Book Consultation</a>
-            </div>
+      <article class="proj rv" data-cat="3d-printing">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">3D printing</span>
+          <h3>Replacement part fabrication</h3>
+          <p>Reverse-engineered a discontinued component from measurements of the broken original.</p>
+          <div class="proj-meta"><span class="chip">Scan</span><span class="chip">PETG</span><span class="chip">One-off</span></div>
         </div>
-    </section>
+      </article>
+
+      <article class="proj rv rv-2" data-cat="network">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">Network infrastructure</span>
+          <h3>Office cabling build-out</h3>
+          <p>Structured Cat6A throughout, wireless design, and a rack built to be worked on later.</p>
+          <div class="proj-meta"><span class="chip">Cat6A</span><span class="chip">Wi-Fi</span><span class="chip">Rack</span></div>
+        </div>
+      </article>
+
+      <article class="proj rv rv-3" data-cat="network">
+        <div class="proj-media"><span class="ph">Case study<br>in progress</span></div>
+        <div class="proj-body">
+          <span class="proj-tag">Network infrastructure</span>
+          <h3>Multi-suite wireless design</h3>
+          <p>Site survey, access point placement, and clean hand-off documentation for the tenant.</p>
+          <div class="proj-meta"><span class="chip">Survey</span><span class="chip">APs</span><span class="chip">Docs</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="panel cta-panel rv">
+      <div class="cta-copy">
+        <h2>Want detail on something like this?</h2>
+        <p>Happy to talk through how a comparable project went — what it cost, what
+          went wrong, and what we'd do differently. That conversation is usually more
+          useful than a polished case study anyway.</p>
+        <div class="cta-btns">
+          <a class="btn btn-primary" href="contact.html">Book a consultation</a>
+          <a class="btn btn-ghost" href="estimator.html">Get an estimate</a>
+        </div>
+      </div>
+      <div class="cta-side">
+        <span class="mono">Good to know</span>
+        <dl>
+          <div><dt>Typical web build</dt><dd>4–10 weeks</dd></div>
+          <div><dt>Service area</dt><dd>Greater Sacramento</dd></div>
+          <div><dt>Estimates</dt><dd>Free, no obligation</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<!-- Footer -->
-<footer class="bg-midnight border-t border-white/10 mt-16">
-    <div class="max-w-[1280px] mx-auto py-16 px-6 md:px-8 flex flex-col md:flex-row justify-between items-start gap-12">
-        <div class="max-w-sm">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center"><span class="material-symbols-outlined text-white text-xl">terminal</span></div>
-                <span class="text-lg font-bold font-serif text-white tracking-tight">WeCanBuildThat</span>
-            </div>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Premium web design & development, 3D printing & prototyping, and enterprise network infrastructure. A proud member of the BlackMountain Development Company group.</p>
-            <div class="flex flex-col gap-2 mb-4">
-                <a href="tel:+19165550100" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">call</span>(916) 555-0100</a>
-                <a href="mailto:info@wecanbuildthat.com" class="flex items-center gap-2 text-sm text-gray-400 hover:text-blue-400 transition-colors"><span class="material-symbols-outlined text-accent text-base">mail</span>info@wecanbuildthat.com</a>
-            </div>
-            <p class="text-xs text-gray-500">© 2026 WeCanBuildThat. All Rights Reserved.</p>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
-            <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Services</h4>
-                <ul class="space-y-2.5 text-sm text-gray-400">
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=web-dev">Web Design & Dev</a></li>
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=3d-printing">3D Printing</a></li>
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html?filter=network">Network Infrastructure</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Company</h4>
-                <ul class="space-y-2.5 text-sm text-gray-400">
-                    <li><a class="hover:text-blue-400 transition-colors" href="portfolio.html">Our Work</a></li>
-                    <li><a class="hover:text-blue-400 transition-colors" href="contact.html">Contact Us</a></li>
-                    <li><a class="hover:text-blue-400 transition-colors" href="estimator.html">Estimator</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-[0.2em] text-white font-bold mb-4">Address</h4>
-                <p class="text-sm text-gray-400 leading-relaxed">100 BlackMountain Way,<br/>Suite 500<br/>Elk Grove, CA 95624</p>
-            </div>
-        </div>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="brand/wordmark-blue.png" alt="We Can Build That">
+        <p>Technology for real people. A BlackMountain Development Company, Northern California.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Web development</a></li>
+          <li><a href="index.html#services">3D printing</a></li>
+          <li><a href="index.html#services">Network infrastructure</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#process">Process</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Start</h4>
+        <ul>
+          <li><a href="shop.html">Gear we recommend</a></li>
+          <li><a href="estimator.html">Cost estimator</a></li>
+          <li><a href="contact.html">Book a consultation</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="foot-base">
+      <span>© <span id="yr">2026</span> We Can Build That. All rights reserved.</span>
+      <span>Sacramento · Elk Grove · Folsom</span>
+    </div>
+  </div>
 </footer>
 
+<script src="site.js"></script>
 <script>
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    function closeMobileMenu() { document.body.classList.remove('menu-open'); mobileMenu.classList.remove('open'); }
-    hamburgerBtn.addEventListener('click', () => { mobileMenu.classList.contains('open') ? closeMobileMenu() : (document.body.classList.add('menu-open'), mobileMenu.classList.add('open')); });
+/* Category filtering. Reads ?filter=web-dev etc. on load so the service links
+   on the homepage can deep-link straight into a filtered view. */
+(function(){
+  var filters = document.querySelector('.filters');
+  var projects = Array.prototype.slice.call(document.querySelectorAll('.proj'));
+  var countEl = document.getElementById('count');
+  if (!filters) return;
 
-    const revealEls = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => obs.observe(el));
-    setTimeout(() => revealEls.forEach(el => el.classList.add('visible')), 2000);
-
-    function filterProjects(category) {
-        document.querySelectorAll('.filter-btn').forEach(btn => { btn.classList.remove('active'); btn.classList.add('text-text-muted'); });
-        const activeBtn = document.getElementById('btn-filter-' + category);
-        if (activeBtn) { activeBtn.classList.add('active'); activeBtn.classList.remove('text-text-muted'); }
-        const cards = document.querySelectorAll('.project-card');
-        let visible = 0;
-        cards.forEach(card => { const show = category === 'all' || card.getAttribute('data-category') === category; card.style.display = show ? 'block' : 'none'; if (show) visible++; });
-        document.getElementById('no-results').classList.toggle('hidden', visible > 0);
-    }
-
-    function openLightbox(src, title) {
-        const lb = document.getElementById('lightbox');
-        document.getElementById('lightbox-img').src = src;
-        document.getElementById('lightbox-title').textContent = title;
-        lb.classList.remove('hidden'); lb.classList.add('flex'); document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-        const lb = document.getElementById('lightbox');
-        lb.classList.add('hidden'); lb.classList.remove('flex'); document.body.style.overflow = '';
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const filter = new URLSearchParams(window.location.search).get('filter') || 'all';
-        filterProjects(filter);
+  function apply(cat){
+    var shown = 0;
+    projects.forEach(function(el){
+      var match = (cat === 'all' || el.dataset.cat === cat);
+      el.style.display = match ? '' : 'none';
+      if (match) shown++;
     });
+    countEl.textContent = shown + (shown === 1 ? ' project' : ' projects');
+    Array.prototype.forEach.call(filters.querySelectorAll('.filter'), function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.cat === cat));
+    });
+  }
+
+  filters.addEventListener('click', function(e){
+    var btn = e.target.closest('.filter');
+    if (!btn) return;
+    apply(btn.dataset.cat);
+    history.replaceState(null, '',
+      btn.dataset.cat === 'all' ? location.pathname : '?filter=' + btn.dataset.cat);
+  });
+
+  var initial = new URLSearchParams(location.search).get('filter');
+  var valid = projects.some(function(el){ return el.dataset.cat === initial; });
+  apply(valid ? initial : 'all');
+})();
 </script>
+
 </body>
 </html>
