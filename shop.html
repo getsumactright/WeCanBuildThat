@@ -239,14 +239,57 @@
    images/products/ and put the filename in the img field.
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* Display order (in the "All" view) is array order — newest addition first.
+   When you add a product, paste its block at the top of this array, not the
+   bottom, so the shop keeps showing newest gear first. */
 var PRODUCTS = [
+  {
+    title: "31G x 8mm pen needle tips, 100-count",
+    cat:   "Misc",
+    price: "$9.99",
+    note:  "Universal-fit replacement tips for pen injectors, thin wall for a more comfortable draw.",
+    url:   "https://www.amazon.com/dp/B0GQSVDD4Y?tag=wecanbuild0fa-20",
+    img:   "pen-needle-tips-generic.png",
+    asin:  "B0GQSVDD4Y",
+    pick:  false
+  },
+  {
+    title: "60-unit reusable peptide pen injector",
+    cat:   "Misc",
+    price: "$40.99",
+    note:  "Reusable auto-pen for 3ml cartridges, with travel case and prep pads included.",
+    url:   "https://www.amazon.com/dp/B0H2GNHTH1?tag=wecanbuild0fa-20",
+    img:   "peptide-pen-injector-generic.png",
+    asin:  "B0H2GNHTH1",
+    pick:  false
+  },
+  {
+    title: "Sterile alcohol prep pads, 500-count",
+    cat:   "Misc",
+    price: "$13.99",
+    note:  "Cleans contacts, print beds, and lenses without leaving residue. Keep a box at every bench — you'll go through them faster than you'd think.",
+    url:   "https://www.amazon.com/dp/B0FWN1MK71?tag=wecanbuild0fa-20",
+    img:   "medpride-alcohol-prep-pads.png",
+    asin:  "B0FWN1MK71",
+    pick:  false
+  },
+  {
+    title: "PETG filament, 1kg spool",
+    cat:   "3D printing",
+    price: "$12.99",
+    note:  "A step up from PLA when parts need more heat and impact resistance — still easy to print without an enclosure.",
+    url:   "https://www.amazon.com/dp/B0D41Y3WWZ?tag=wecanbuild0fa-20",
+    img:   "elegoo-petg-pro-filament.jpg",
+    asin:  "B0D41Y3WWZ",
+    pick:  true
+  },
   {
     title: "Wi-Fi 6E mesh router system",
     cat:   "Networking",
     price: "$299",
     note:  "What we put in most home offices that outgrew the ISP box. Handles a heavy video-call household without hand-off drops.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "wifi-mesh-router-generic.png",
     asin:  "",
     pick:  true
   },
@@ -256,7 +299,7 @@ var PRODUCTS = [
     price: "$479",
     note:  "The backup answer for a small office that keeps everything on one laptop. Set it up once, stop worrying.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "nas-4bay-generic.png",
     asin:  "",
     pick:  false
   },
@@ -266,19 +309,9 @@ var PRODUCTS = [
     price: "$34",
     note:  "Boring, and that's the point. Correct spec for anything you'd actually want to run at 10G later.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "cat6a-patch-cables-generic.png",
     asin:  "",
     pick:  false
-  },
-  {
-    title: "PETG filament, 1kg spool",
-    cat:   "3D printing",
-    price: "$12.99",
-    note:  "A step up from PLA when parts need more heat and impact resistance — still easy to print without an enclosure.",
-    url:   "https://www.amazon.com/dp/B0D41Y3WWZ?tag=wecanbuild0fa-20",
-    img:   "",
-    asin:  "B0D41Y3WWZ",
-    pick:  true
   },
   {
     title: "PLA+ filament, 1kg spool",
@@ -286,7 +319,7 @@ var PRODUCTS = [
     price: "$26",
     note:  "Our default for prototype parts. More forgiving than standard PLA and it doesn't get brittle sitting on a shelf.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "pla-plus-filament-generic.png",
     asin:  "",
     pick:  false
   },
@@ -296,7 +329,7 @@ var PRODUCTS = [
     price: "$59",
     note:  "If your prints started stringing for no obvious reason, it's moisture. This fixes it and pays for itself in wasted spools.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "filament-dry-box-generic.png",
     asin:  "",
     pick:  false
   },
@@ -306,7 +339,7 @@ var PRODUCTS = [
     price: "$399",
     note:  "One cable for video, data, and laptop charging. The desk-clutter difference is bigger than the spec sheet suggests.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "monitor-27-4k-generic.png",
     asin:  "",
     pick:  false
   },
@@ -316,7 +349,7 @@ var PRODUCTS = [
     price: "$189",
     note:  "Cheap insurance for anything with a spinning disk or a router you'd rather not power-cycle during a brownout.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "ups-1500va-generic.png",
     asin:  "",
     pick:  false
   },
@@ -326,44 +359,8 @@ var PRODUCTS = [
     price: "$74",
     note:  "If you're terminating your own keystones, get this before you get frustrated. Finds the one bad crimp in a wall of them.",
     url:   "https://www.amazon.com/dp/REPLACE_ME?tag=YOURTAG-20",
-    img:   "",
+    img:   "cable-tester-toner-generic.png",
     asin:  "",
-    pick:  false
-  },
-
-  /* ── Misc ──────────────────────────────────────────────────────────────
-     Catch-all for products that don't fit the categories above. Placeholder
-     so the "Misc" filter button appears — replace the title, price, note,
-     and url with a real product, then copy this block for each additional
-     item. Delete it if you don't need the category. */
-  {
-    title: "Sterile alcohol prep pads, 500-count",
-    cat:   "Misc",
-    price: "$13.99",
-    note:  "Cleans contacts, print beds, and lenses without leaving residue. Keep a box at every bench — you'll go through them faster than you'd think.",
-    url:   "https://www.amazon.com/dp/B0FWN1MK71?tag=wecanbuild0fa-20",
-    img:   "",
-    asin:  "B0FWN1MK71",
-    pick:  false
-  },
-  {
-    title: "60-unit reusable peptide pen injector",
-    cat:   "Misc",
-    price: "$40.99",
-    note:  "Reusable auto-pen for 3ml cartridges, with travel case and prep pads included.",
-    url:   "https://www.amazon.com/dp/B0H2GNHTH1?tag=wecanbuild0fa-20",
-    img:   "",
-    asin:  "B0H2GNHTH1",
-    pick:  false
-  },
-  {
-    title: "31G x 8mm pen needle tips, 100-count",
-    cat:   "Misc",
-    price: "$9.99",
-    note:  "Universal-fit replacement tips for pen injectors, thin wall for a more comfortable draw.",
-    url:   "https://www.amazon.com/dp/B0GQSVDD4Y?tag=wecanbuild0fa-20",
-    img:   "",
-    asin:  "B0GQSVDD4Y",
     pick:  false
   }
 ];
