@@ -77,6 +77,20 @@
   .tile h3{font-size:16.5px;margin-bottom:4px}
   .tile p{font-size:12.5px;color:var(--muted)}
 
+  .follow{border-top:1px solid var(--line);padding-block:clamp(48px,6vw,80px)}
+  .follow-panel{background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);
+    box-shadow:var(--shadow-card);display:grid;grid-template-columns:1fr 300px;overflow:hidden}
+  .follow-copy{padding:clamp(28px,4vw,44px)}
+  .follow-copy .mono{display:block;margin-bottom:16px}
+  .follow-copy h2{margin-bottom:14px;max-width:18ch}
+  .follow-copy p{font-size:15.5px;color:var(--body);max-width:42ch;margin-bottom:24px}
+  .follow-grid{background:var(--cream);border-left:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:clamp(20px,3vw,28px)}
+  .follow-tile{aspect-ratio:1;border-radius:var(--r-btn);background:var(--white);
+    border:1px dashed var(--line);display:flex;align-items:center;justify-content:center}
+  .follow-tile span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--muted);text-align:center;padding:0 6px}
+
   .proof-grid{display:grid;grid-template-columns:1fr 300px;gap:clamp(32px,5vw,64px);align-items:start}
 
   .estimate{padding-block:clamp(48px,6vw,80px)}
@@ -98,6 +112,8 @@
     .hero-grid,.proc-grid,.proof-grid{grid-template-columns:1fr}
     .est-panel{grid-template-columns:1fr}
     .est-side{border-left:0;border-top:1px solid var(--line)}
+    .follow-panel{grid-template-columns:1fr}
+    .follow-grid{border-left:0;border-top:1px solid var(--line);grid-template-columns:repeat(4,1fr)}
     .work-grid{grid-template-columns:1fr 1fr}
     .tile-lg{grid-row:span 1;min-height:0}
   }
@@ -280,6 +296,29 @@
     </div>
   </section>
 
+  <!-- ═══ 4.5 · FOLLOW — Instagram teaser strip ═══ -->
+  <!-- Placeholder tiles, same pattern as the Work section above. Replace each
+       .follow-tile with an actual Instagram post image (or an <img> pointing
+       at images/social/) once there's real content to show, and swap the
+       copy below for whatever's true of the account at the time. -->
+  <section class="follow wrap">
+    <div class="follow-panel rv">
+      <div class="follow-copy">
+        <span class="mono">@wecanbuildthatorg</span>
+        <h2>Follow the build.</h2>
+        <p>Installs, prints, and job-site photos go up on Instagram first — often before
+          they make it into the portfolio.</p>
+        <a class="btn btn-primary" href="https://www.instagram.com/wecanbuildthatorg/" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
+      <div class="follow-grid">
+        <div class="follow-tile"><span>Instagram photo</span></div>
+        <div class="follow-tile"><span>Instagram photo</span></div>
+        <div class="follow-tile"><span>Instagram photo</span></div>
+        <div class="follow-tile"><span>Instagram photo</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ 5 · PROOF — full-bleed band, commitments not borrowed quotes ═══ -->
   <!-- When real, permissioned client testimonials exist, one can replace the h2/p
        block here. Until then this section sells verifiable commitments instead. -->
@@ -332,6 +371,9 @@
       <div class="foot-brand">
         <img src="brand/wordmark-blue.png" alt="We Can Build That">
         <p>Technology for real people. A BlackMountain Development Company, Northern California.</p>
+        <a class="foot-social" href="https://www.instagram.com/wecanbuildthatorg/" target="_blank" rel="noopener" aria-label="We Can Build That on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
       </div>
       <div>
         <h4>Services</h4>

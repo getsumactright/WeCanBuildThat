@@ -161,7 +161,12 @@ ul{margin:0;padding:0;list-style:none}
 .foot{border-top:1px solid var(--line);padding-block:clamp(40px,5vw,56px) 28px}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px;margin-bottom:36px}
 .foot-brand img{height:42px;margin-bottom:16px}
-.foot-brand p{font-size:13.5px;color:var(--muted);max-width:30ch}
+.foot-brand p{font-size:13.5px;color:var(--muted);max-width:30ch;margin-bottom:16px}
+.foot-social{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;
+  border:1px solid var(--line);border-radius:999px;color:var(--body);
+  transition:color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease)}
+.foot-social:hover{color:var(--blue);border-color:var(--blue)}
+.foot-social svg{width:16px;height:16px}
 .foot h4{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.08em;
   text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .foot li{padding-block:2px}
@@ -188,6 +193,8 @@ ul{margin:0;padding:0;list-style:none}
      from here down, not just at phone widths. */
   .foot li{padding-block:0}
   .foot li a{display:inline-block;padding-block:14px}
+  .foot-social{width:44px;height:44px}
+  .foot-social svg{width:18px;height:18px}
 }
 @media (max-width:720px){
   .nav-links{display:none}
